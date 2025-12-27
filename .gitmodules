@@ -15,4 +15,4 @@
 	url = https://github.com/marius-patrik/pokedex.git
 [submodule "libraries/liqid"]
 	path = libraries/liqid
-	url = https://github.com/marius-patrik/libraries.git
+	url = https://github.com/marius-patrik/liqid.git
