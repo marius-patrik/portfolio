@@ -28,8 +28,8 @@ run_lint() {
 }
 
 # Run lint for each project
-run_lint "libraries/liqid-components"
-run_lint "libraries/liqid-ui"
+run_lint "libraries/liqid/liqid-components"
+run_lint "libraries/liqid/liqid-ui"
 run_lint "apps/liqid-docs"
 run_lint "apps/liqid-showcase"
 

@@ -43,15 +43,7 @@ push_repo() {
 COMMIT_MESSAGE="$1"
 
 # Top-level submodules
-submodules=("libraries/liqid-components" "libraries/liqid-ui" "apps/liqid-docs" "apps/liqid-showcase")
-
-# Nested submodules (inside liqid-showcase)
-nested_submodules=("apps/liqid-showcase/src/components/Apps/phonebooth" "apps/liqid-showcase/src/components/Apps/tradebot" "apps/liqid-showcase/src/components/Apps/pokedex")
-
-# Push nested submodules first
-for sub in "${nested_submodules[@]}"; do
-    push_repo "$sub"
-done
+submodules=("libraries/liqid/liqid-components" "libraries/liqid/liqid-ui" "apps/liqid-docs" "apps/liqid-showcase" "apps/phonebooth" "apps/tradebot" "apps/pokedex")
 
 # Push submodules
 for sub in "${submodules[@]}"; do

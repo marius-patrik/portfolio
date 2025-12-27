@@ -8,15 +8,16 @@ This monorepo contains the following repositories as git submodules:
 
 ### Core Libraries
 
-- **[liqid-components](https://github.com/marius-patrik/liqid-components.git)** (`libraries/liqid-components`): Core React component library with glassmorphism styling (Rslib)
-- **[liqid-ui](https://github.com/marius-patrik/liqid-ui.git)** (`libraries/liqid-ui`): Desktop UI library for window management and shells (Rslib)
+- **[liqid-components](https://github.com/marius-patrik/liqid-components.git)** (`libraries/liqid/liqid-components`): Core React component library with glassmorphism styling (Rslib)
+- **[liqid-ui](https://github.com/marius-patrik/liqid-ui.git)** (`libraries/liqid/liqid-ui`): Desktop UI library for window management and shells (Rslib)
 
 ### Applications
 
 - **[liqid-docs](https://github.com/marius-patrik/liqid-docs.git)** (`apps/liqid-docs`): Documentation website (Rsbuild App)
 - **[liqid-showcase](https://github.com/marius-patrik/liqid-showcase.git)** (`apps/liqid-showcase`): Demo desktop showcase application (Rsbuild App)
-- **[phonebooth](https://github.com/marius-patrik/phonebooth.git)** (`apps/liqid-showcase/src/components/Apps/phonebooth`): Phone application (nested submodule)
-- **[tradebot](https://github.com/marius-patrik/tradebot.git)** (`apps/liqid-showcase/src/components/Apps/tradebot`): Trading bot application (nested submodule)
+- **[phonebooth](https://github.com/marius-patrik/phonebooth.git)** (`apps/phonebooth`): Phone application
+- **[tradebot](https://github.com/marius-patrik/tradebot.git)** (`apps/tradebot`): Trading bot application
+- **[pokedex](https://github.com/marius-patrik/pokedex.git)** (`apps/pokedex`): Pokémon database application
 
 ### Repository Structure
 
@@ -56,8 +57,8 @@ This monorepo contains the following repositories as git submodules:
    npm install
 
    # Individual submodules
-   cd libraries/liqid-components && npm install && cd ../..
-   cd libraries/liqid-ui && npm install && cd ../..
+   cd libraries/liqid/liqid-components && npm install && cd ../../..
+   cd libraries/liqid/liqid-ui && npm install && cd ../../..
    cd apps/liqid-docs && npm install && cd ../..
    cd apps/liqid-showcase && npm install && cd ../..
    ```

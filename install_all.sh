@@ -28,23 +28,25 @@ run_in_dir "apps/liqid-docs" "npm install" "Installing dependencies"
 # 3. Install liqid-showcase dependencies
 run_in_dir "apps/liqid-showcase" "npm install" "Installing dependencies"
 
-# 4. Install phonebooth dependencies
-run_in_dir "apps/liqid-showcase/src/components/Apps/phonebooth" "npm install" "Installing dependencies"
+# 4. Install phonebooth dependencies (if it has package.json)
+if [ -f "apps/phonebooth/package.json" ]; then
+    run_in_dir "apps/phonebooth" "npm install" "Installing dependencies"
+fi
 
 # 5. Install tradebot dependencies (if it has package.json)
-if [ -f "apps/liqid-showcase/src/components/Apps/tradebot/package.json" ]; then
-    run_in_dir "apps/liqid-showcase/src/components/Apps/tradebot" "npm install" "Installing dependencies"
+if [ -f "apps/tradebot/package.json" ]; then
+    run_in_dir "apps/tradebot" "npm install" "Installing dependencies"
 fi
 
 echo "=================================================="
 echo "Building Core Libraries"
 echo "=================================================="
 
-# 7. Build liqid-components
-run_in_dir "libraries/liqid-components" "npm run build" "Building liqid-components"
+# 6. Build liqid-components
+run_in_dir "libraries/liqid/liqid-components" "npm run build" "Building liqid-components"
 
-# 8. Build liqid-ui
-run_in_dir "libraries/liqid-ui" "npm run build" "Building liqid-ui"
+# 7. Build liqid-ui
+run_in_dir "libraries/liqid/liqid-ui" "npm run build" "Building liqid-ui"
 
 echo "--------------------------------------------------"
 echo "All installations and builds completed!"
