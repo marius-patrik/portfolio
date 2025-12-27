@@ -4,10 +4,10 @@ Welcome to the **Liqid** project monorepo. This repository houses the ecosystem 
 
 ## Structure
 
-- **[liqid-components](./liqid-components)**: The core React component library (Rslib).
-- **[liqid-ui](./liqid-ui)**: The Desktop UI library (Rslib).
-- **[liqid-docs](./liqid-docs)**: Documentation website (Rsbuild App).
-- **[liqid-playground](./liqid-playground)**: Component playground and testing environment (Rsbuild App).
+- **[liqid-components](./liqid-components)**: Core React component library with glassmorphism styling (Rslib)
+- **[liqid-ui](./liqid-ui)**: Desktop UI library for window management and shells (Rslib)
+- **[liqid-docs](./liqid-docs)**: Documentation website (Rsbuild App)
+- **[portfolio](./portfolio)**: Demo portfolio desktop application (Rsbuild App)
 
 ## Setup
 
@@ -34,6 +34,15 @@ Welcome to the **Liqid** project monorepo. This repository houses the ecosystem 
 ## Development
 
 Each submodule is independent. You can run `npm run dev` inside `liqid-docs` or `liqid-playground` to start their development servers.
+
+## Scripts
+
+| Script            | Description                                      |
+| ----------------- | ------------------------------------------------ |
+| `./push_all.sh`   | Push all submodules and root repo to origin/main |
+| `./squash_all.sh` | Squash all history and force push (destructive)  |
+
+These scripts are also available as VS Code tasks via **Tasks: Run Task**.
 
 ## License
 

@@ -1,0 +1,15 @@
+{
+  "name": "liqid-workspace",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "lint:all": "npm run lint --workspaces --if-present",
+    "build:all": "npm run build --workspaces --if-present",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "workspaces": [
+    "liqid",
+    "liqid-components",
+    "liqid-ui"
+  ]
+}

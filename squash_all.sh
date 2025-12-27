@@ -47,10 +47,24 @@ squash_repo() {
     echo "Finished squashing $dir"
 }
 
-# Submodules list
-submodules=("liqid-components" "liqid-ui" "liqid-docs" "liqid-playground")
+# Top-level submodules
+submodules=("liqid-components" "liqid-ui" "liqid-docs" "portfolio")
 
-# Squash submodules first
+# Nested submodules (inside portfolio)
+nested_submodules=("portfolio/src/components/Apps/phonebooth")
+
+# Squash nested submodules first
+for sub in "${nested_submodules[@]}"; do
+    squash_repo "$sub"
+done
+
+# Update nested submodule pointers in portfolio
+cd portfolio
+git add src/components/Apps/phonebooth
+git commit -m "chore: update nested submodule pointers after squash" --allow-empty
+cd ..
+
+# Squash submodules
 for sub in "${submodules[@]}"; do
     squash_repo "$sub"
 done
