@@ -18,7 +18,8 @@
 
 ## Tasks
 
-- [x] Rename `liqid` package to `liqid-components` in `/liqid-components/package.json`
+- [x] Rename `liqid` package to `liqid-components` in `libraries/liqid-components/package.json`
 - [x] Update `liqid-ui` to depend on `liqid-components`
 - [x] Refactor imports in `liqid-ui` from `"liqid"` to `"liqid-components"`
-- [x] Create new `liqid` package in `/liqid` exporting both libraries
+- [🚫] Create new `liqid` package in `/liqid` exporting both libraries (Not implemented - using npm workspaces instead)
+- [x] Update all scripts (install_all.sh, lint_all.sh, push_all.sh, squash_all.sh) with correct paths (apps/ and libraries/ prefixes)

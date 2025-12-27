@@ -34,7 +34,7 @@
       "type": "shell",
       "command": "npm run dev",
       "options": {
-        "cwd": "${workspaceFolder}/liqid-components"
+        "cwd": "${workspaceFolder}/libraries/liqid/liqid-components"
       },
       "isBackground": true,
       "problemMatcher": ["$tsc-watch"],
@@ -47,7 +47,7 @@
       "type": "shell",
       "command": "npm run dev",
       "options": {
-        "cwd": "${workspaceFolder}/liqid-ui"
+        "cwd": "${workspaceFolder}/libraries/liqid/liqid-ui"
       },
       "isBackground": true,
       "problemMatcher": ["$tsc-watch"],
@@ -68,7 +68,7 @@
       "type": "shell",
       "command": "npm run dev",
       "options": {
-        "cwd": "${workspaceFolder}/liqid-docs"
+        "cwd": "${workspaceFolder}/apps/liqid-docs"
       },
       "isBackground": true,
       "problemMatcher": ["$tsc-watch"],
@@ -77,11 +77,11 @@
       }
     },
     {
-      "label": "Start Portfolio",
+      "label": "Start Showcase",
       "type": "shell",
       "command": "npm run dev",
       "options": {
-        "cwd": "${workspaceFolder}/portfolio"
+        "cwd": "${workspaceFolder}/apps/liqid-showcase"
       },
       "isBackground": true,
       "problemMatcher": ["$tsc-watch"],
@@ -91,7 +91,7 @@
     },
     {
       "label": "Start All Apps",
-      "dependsOn": ["Start Docs", "Start Portfolio"],
+      "dependsOn": ["Start Docs", "Start Showcase"],
       "problemMatcher": [],
       "presentation": {
         "group": "apps"

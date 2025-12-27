@@ -26,10 +26,9 @@ run_lint() {
 }
 
 # Run lint for each project
-run_lint "liqid"
-run_lint "liqid-components"
-run_lint "liqid-ui"
-run_lint "liqid-docs"
-run_lint "portfolio"
+run_lint "libraries/liqid-components"
+run_lint "libraries/liqid-ui"
+run_lint "apps/liqid-docs"
+run_lint "apps/liqid-showcase"
 
 echo -e "\n${GREEN}All projects linted successfully!${NC}"

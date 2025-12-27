@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Function to push a repo
-# Function to push a repo
 push_repo() {
     local dir=$1
     echo "--------------------------------------------------"
@@ -44,10 +43,10 @@ push_repo() {
 COMMIT_MESSAGE="$1"
 
 # Top-level submodules
-submodules=("liqid-components" "liqid-ui" "liqid-docs" "portfolio")
+submodules=("libraries/liqid-components" "libraries/liqid-ui" "apps/liqid-docs" "apps/liqid-showcase")
 
 # Nested submodules (inside portfolio)
-nested_submodules=("portfolio/src/components/Apps/phonebooth")
+nested_submodules=("apps/liqid-showcase/src/components/Apps/phonebooth")
 
 # Push nested submodules first
 for sub in "${nested_submodules[@]}"; do

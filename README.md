@@ -7,7 +7,7 @@ Welcome to the **Liqid** project monorepo. This repository houses the ecosystem 
 - **[liqid-components](./liqid-components)**: Core React component library with glassmorphism styling (Rslib)
 - **[liqid-ui](./liqid-ui)**: Desktop UI library for window management and shells (Rslib)
 - **[liqid-docs](./liqid-docs)**: Documentation website (Rsbuild App)
-- **[portfolio](./portfolio)**: Demo portfolio desktop application (Rsbuild App)
+- **[liqid-showcase](./liqid-showcase)**: Demo desktop showcase application (Rsbuild App)
 
 ## Setup
 
