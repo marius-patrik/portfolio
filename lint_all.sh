@@ -10,16 +10,18 @@ echo "Starting linting for all projects..."
 # Function to run lint in a directory
 run_lint() {
   local dir=$1
+  local original_dir=$(pwd)
   echo -e "\n${GREEN}Linting $dir...${NC}"
   if [ -d "$dir" ]; then
-    cd "$dir"
+    cd "$dir" || { echo -e "${RED}Failed to cd into $dir${NC}"; return 1; }
     if npm run lint; then
         echo -e "${GREEN}✓ $dir linted successfully.${NC}"
     else
         echo -e "${RED}✗ Failed to lint $dir.${NC}"
+        cd "$original_dir"
         exit 1
     fi
-    cd ..
+    cd "$original_dir"
   else
     echo -e "${RED}Directory $dir does not exist.${NC}"
   fi

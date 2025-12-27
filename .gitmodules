@@ -1,6 +1,21 @@
-[submodule "libraries"]
-	path = libraries
-	url = https://github.com/marius-patrik/libraries.git
-[submodule "apps"]
-	path = apps
-	url = https://github.com/marius-patrik/apps.git
+[submodule "libraries/liqid/liqid-components"]
+	path = libraries/liqid/liqid-components
+	url = https://github.com/marius-patrik/liqid-components.git
+[submodule "libraries/liqid/liqid-ui"]
+	path = libraries/liqid/liqid-ui
+	url = https://github.com/marius-patrik/liqid-ui.git
+[submodule "apps/liqid-docs"]
+	path = apps/liqid-docs
+	url = https://github.com/marius-patrik/liqid-docs.git
+[submodule "apps/liqid-showcase"]
+	path = apps/liqid-showcase
+	url = https://github.com/marius-patrik/liqid-showcase.git
+[submodule "apps/phonebooth"]
+	path = apps/phonebooth
+	url = https://github.com/marius-patrik/phonebooth.git
+[submodule "apps/tradebot"]
+	path = apps/tradebot
+	url = https://github.com/marius-patrik/tradebot.git
+[submodule "apps/pokedex"]
+	path = apps/pokedex
+	url = https://github.com/marius-patrik/pokedex.git

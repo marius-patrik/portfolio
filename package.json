@@ -9,8 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "workspaces": [
-    "libraries/liqid-components",
-    "libraries/liqid-ui",
+    "libraries/liqid/liqid-components",
+    "libraries/liqid/liqid-ui",
     "apps/liqid-docs",
     "apps/liqid-showcase"
   ]

@@ -45,8 +45,8 @@ COMMIT_MESSAGE="$1"
 # Top-level submodules
 submodules=("libraries/liqid-components" "libraries/liqid-ui" "apps/liqid-docs" "apps/liqid-showcase")
 
-# Nested submodules (inside portfolio)
-nested_submodules=("apps/liqid-showcase/src/components/Apps/phonebooth")
+# Nested submodules (inside liqid-showcase)
+nested_submodules=("apps/liqid-showcase/src/components/Apps/phonebooth" "apps/liqid-showcase/src/components/Apps/tradebot" "apps/liqid-showcase/src/components/Apps/pokedex")
 
 # Push nested submodules first
 for sub in "${nested_submodules[@]}"; do

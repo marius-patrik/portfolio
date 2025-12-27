@@ -50,8 +50,8 @@ squash_repo() {
 # Top-level submodules
 submodules=("libraries/liqid-components" "libraries/liqid-ui" "apps/liqid-docs" "apps/liqid-showcase")
 
-# Nested submodules (inside portfolio)
-nested_submodules=("apps/liqid-showcase/src/components/Apps/phonebooth")
+# Nested submodules (inside liqid-showcase)
+nested_submodules=("apps/liqid-showcase/src/components/Apps/phonebooth" "apps/liqid-showcase/src/components/Apps/tradebot" "apps/liqid-showcase/src/components/Apps/pokedex")
 
 # Squash nested submodules first
 for sub in "${nested_submodules[@]}"; do
@@ -60,7 +60,7 @@ done
 
 # Update nested submodule pointers in liqid-showcase
 cd apps/liqid-showcase
-git add src/components/Apps/phonebooth
+git add src/components/Apps/phonebooth src/components/Apps/tradebot src/components/Apps/pokedex
 git commit -m "chore: update nested submodule pointers after squash" --allow-empty
 cd ../..
 
