@@ -1,0 +1,123 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Squash All Repos",
+      "type": "shell",
+      "command": "./.scripts/squash_all.sh",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Push All Repos",
+      "type": "shell",
+      "command": "./.scripts/push_all.sh",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Force Push All Repos",
+      "type": "shell",
+      "command": "./.scripts/force_push_all.sh",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Start Liqid Components",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/Projects/Code/Libraries/liqid/liqid-components"
+      },
+      "isBackground": true,
+      "problemMatcher": ["$tsc-watch"],
+      "presentation": {
+        "group": "libraries"
+      }
+    },
+    {
+      "label": "Start Liqid UI",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/Projects/Code/Libraries/liqid/liqid-ui"
+      },
+      "isBackground": true,
+      "problemMatcher": ["$tsc-watch"],
+      "presentation": {
+        "group": "libraries"
+      }
+    },
+    {
+      "label": "Start All Libraries",
+      "dependsOn": ["Start Liqid Components", "Start Liqid UI"],
+      "problemMatcher": [],
+      "presentation": {
+        "group": "libraries"
+      }
+    },
+    {
+      "label": "Start Docs",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/Projects/Code/Apps/liqid-docs"
+      },
+      "isBackground": true,
+      "problemMatcher": ["$tsc-watch"],
+      "presentation": {
+        "group": "apps"
+      }
+    },
+    {
+      "label": "Start Showcase",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/Projects/Code/Apps/liqid-showcase"
+      },
+      "isBackground": true,
+      "problemMatcher": ["$tsc-watch"],
+      "presentation": {
+        "group": "apps"
+      }
+    },
+    {
+      "label": "Start All Apps",
+      "dependsOn": ["Start Docs", "Start Showcase"],
+      "problemMatcher": [],
+      "presentation": {
+        "group": "apps"
+      }
+    },
+    {
+      "label": "Start Everything",
+      "dependsOn": ["Start All Libraries", "Start All Apps"],
+      "problemMatcher": [],
+      "presentation": {
+        "group": "all"
+      }
+    }
+  ]
+}
