@@ -1,27 +1,57 @@
-[submodule "Applications/liqid-docs"]
-	path = Applications/liqid-docs
+[submodule "liqid-docs"]
+	path = liqid-docs
 	url = https://github.com/marius-patrik/liqid-docs.git
-[submodule "Applications/liqid-showcase"]
-	path = Applications/liqid-showcase
+[submodule "liqid-showcase"]
+	path = liqid-showcase
 	url = https://github.com/marius-patrik/liqid-showcase.git
-[submodule "Applications/phonebooth"]
-	path = Applications/phonebooth
+[submodule "portfolio-page"]
+	path = portfolio-page
+	url = https://github.com/marius-patrik/portfolio-page.git
+[submodule "phonebooth"]
+	path = phonebooth
 	url = https://github.com/marius-patrik/phonebooth.git
-[submodule "Applications/tradebot"]
-	path = Applications/tradebot
+[submodule "tradebot"]
+	path = tradebot
 	url = https://github.com/marius-patrik/tradebot.git
-[submodule "Applications/pokedex"]
-	path = Applications/pokedex
+[submodule "pokedex"]
+	path = pokedex
 	url = https://github.com/marius-patrik/pokedex.git
-[submodule "Libraries/liqid"]
-	path = Libraries/liqid
+[submodule "liqid"]
+	path = liqid
 	url = https://github.com/marius-patrik/liqid.git
-[submodule "Projects/RobotArm"]
-	path = Projects/RobotArm
+[submodule "liqid/liqid-components"]
+	path = liqid/liqid-components
+	url = https://github.com/marius-patrik/liqid-components.git
+[submodule "liqid/liqid-ui"]
+	path = liqid/liqid-ui
+	url = https://github.com/marius-patrik/liqid-ui.git
+[submodule "RobotArm"]
+	path = RobotArm
 	url = https://github.com/marius-patrik/RobotArm.git
-[submodule "Projects/SuperHumanRobot"]
-	path = Projects/SuperHumanRobot
+[submodule "SuperHumanRobot"]
+	path = SuperHumanRobot
 	url = https://github.com/marius-patrik/SuperHumanRobot.git
-[submodule "Projects/VRHeadset"]
-	path = Projects/VRHeadset
+[submodule "VRHeadset"]
+	path = VRHeadset
 	url = https://github.com/marius-patrik/VRHeadset.git
+[submodule "todolist"]
+	path = todolist
+	url = https://github.com/marius-patrik/todolist.git
+[submodule "clock"]
+	path = clock
+	url = https://github.com/marius-patrik/clock.git
+[submodule "camera"]
+	path = camera
+	url = https://github.com/marius-patrik/camera.git
+[submodule "calculator"]
+	path = calculator
+	url = https://github.com/marius-patrik/calculator.git
+[submodule "calendar"]
+	path = calendar
+	url = https://github.com/marius-patrik/calendar.git
+[submodule "browser"]
+	path = browser
+	url = https://github.com/marius-patrik/browser.git
+[submodule "notes"]
+	path = notes
+	url = https://github.com/marius-patrik/notes.git

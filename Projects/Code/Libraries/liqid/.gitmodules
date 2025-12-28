@@ -1,6 +1,0 @@
-[submodule "liqid-components"]
-	path = liqid-components
-	url = https://github.com/marius-patrik/liqid-components.git
-[submodule "liqid-ui"]
-	path = liqid-ui
-	url = https://github.com/marius-patrik/liqid-ui.git

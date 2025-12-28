@@ -8,23 +8,24 @@ This monorepo contains the following repositories as git submodules:
 
 ### Core Libraries
 
-- **[liqid](https://github.com/marius-patrik/liqid.git)** (`Libraries/liqid`): Liqid design system bundle package containing:
-  - **[liqid-components](https://github.com/marius-patrik/liqid-components.git)** (`Libraries/liqid/liqid-components`): Core React component library with glassmorphism styling (Rslib)
-  - **[liqid-ui](https://github.com/marius-patrik/liqid-ui.git)** (`Libraries/liqid/liqid-ui`): Desktop UI library for window management and shells (Rslib)
+- **[liqid-components](https://github.com/marius-patrik/liqid-components.git)** (`liqid-components`): Core React component library with glassmorphism styling (Rslib)
+- **[liqid-ui](https://github.com/marius-patrik/liqid-ui.git)** (`liqid-ui`): Desktop UI library for window management and shells (Rslib)
+- **[liqid](https://github.com/marius-patrik/liqid.git)** (`liqid`): Liqid design system bundle package
 
 ### Applications
 
-- **[liqid-docs](https://github.com/marius-patrik/liqid-docs.git)** (`Applications/liqid-docs`): Documentation website (Rsbuild App)
-- **[liqid-showcase](https://github.com/marius-patrik/liqid-showcase.git)** (`Applications/liqid-showcase`): Demo desktop showcase application (Rsbuild App)
-- **[phonebooth](https://github.com/marius-patrik/phonebooth.git)** (`Applications/phonebooth`): Phone application
-- **[tradebot](https://github.com/marius-patrik/tradebot.git)** (`Applications/tradebot`): Trading bot application
-- **[pokedex](https://github.com/marius-patrik/pokedex.git)** (`Applications/pokedex`): Pokémon database application
+- **[liqid-docs](https://github.com/marius-patrik/liqid-docs.git)** (`liqid-docs`): Documentation website (Rsbuild App)
+- **[liqid-showcase](https://github.com/marius-patrik/liqid-showcase.git)** (`liqid-showcase`): Demo desktop showcase application (Rsbuild App)
+- **[phonebooth](https://github.com/marius-patrik/phonebooth.git)** (`phonebooth`): Phone application
+- **[tradebot](https://github.com/marius-patrik/tradebot.git)** (`tradebot`): Trading bot application
+- **[pokedex](https://github.com/marius-patrik/pokedex.git)** (`pokedex`): Pokémon database application
+- **[portfolio-page](https://github.com/marius-patrik/portfolio-page.git)** (`portfolio-page`): Portfolio showcase website (Rsbuild App)
 
 ### Hardware Projects
 
-- **[RobotArm](https://github.com/marius-patrik/RobotArm.git)** (`hardware/RobotArm`): Robot arm project
-- **[SuperHumanRobot](https://github.com/marius-patrik/SuperHumanRobot.git)** (`hardware/SuperHumanRobot`): SuperHuman robot project
-- **[VRHeadset](https://github.com/marius-patrik/VRHeadset.git)** (`hardware/VRHeadset`): VR headset project
+- **[RobotArm](https://github.com/marius-patrik/RobotArm.git)** (`RobotArm`): Robot arm project
+- **[SuperHumanRobot](https://github.com/marius-patrik/SuperHumanRobot.git)** (`SuperHumanRobot`): SuperHuman robot project
+- **[VRHeadset](https://github.com/marius-patrik/VRHeadset.git)** (`VRHeadset`): VR headset project
 
 ### Repository Structure
 
@@ -63,19 +64,18 @@ This monorepo contains the following repositories as git submodules:
    # Root dependencies (workspaces)
    npm install
 
-   # Liqid library (contains nested submodules)
-   cd Libraries/liqid && npm install && cd ../..
-   
-   # Nested liqid submodules
-   cd Libraries/liqid/liqid-components && npm install && cd ../../..
-   cd Libraries/liqid/liqid-ui && npm install && cd ../../..
+   # Libraries
+   cd liqid-components && npm install && cd ..
+   cd liqid-ui && npm install && cd ..
+   cd liqid && npm install && cd ..
 
    # Applications
-   cd Applications/liqid-docs && npm install && cd ../..
-   cd Applications/liqid-showcase && npm install && cd ../..
-   cd Applications/phonebooth && npm install && cd ../..
-   cd Applications/tradebot && npm install && cd ../..
-   cd Applications/pokedex && npm install && cd ../..
+   cd liqid-docs && npm install && cd ..
+   cd liqid-showcase && npm install && cd ..
+   cd phonebooth && npm install && cd ..
+   cd tradebot && npm install && cd ..
+   cd pokedex && npm install && cd ..
+   cd portfolio-page && npm install && cd ..
    ```
 
 ## Development
@@ -84,7 +84,7 @@ Each submodule is independent. You can run `npm run dev` inside any application 
 
 Example:
 ```bash
-cd Applications/liqid-showcase
+cd liqid-showcase
 npm run dev
 ```
 
