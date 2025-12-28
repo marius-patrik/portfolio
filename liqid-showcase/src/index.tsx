@@ -5,7 +5,7 @@ import { useHashLocation } from 'wouter/use-hash-location';
 import Explorer from './pages/explorer';
 import { LoginPage } from './pages/login';
 import './global.css';
-import 'liqid-components/styles.css';
+import 'liqid/styles.css';
 
 // Check if JWT token exists and is valid
 const isAuthenticated = (): boolean => {

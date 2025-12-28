@@ -10,7 +10,8 @@
     "lint": "biome check --write"
   },
   "dependencies": {
-    "liqid": "file:../liqid",
+    "liqid-components": "file:../../libraries/liqid-components",
+    "liqid-ui": "file:../../libraries/liqid-ui",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },

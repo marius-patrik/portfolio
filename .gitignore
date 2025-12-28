@@ -1,0 +1,15 @@
+# Patterns migrated from .git/info/exclude
+.DS_Store
+node_modules
+.env
+
+.agent/
+.cursor/
+
+.cursorrules
+
+.vscode/
+
+# Shell scripts
+.scripts/
+

@@ -3,6 +3,11 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* Global styles */
+*,
+*::before,
+*::after {
+}
+
 html,
 body {
   height: 100%;

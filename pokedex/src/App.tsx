@@ -1,4 +1,4 @@
-import { Container, Title, Text } from 'liqid';
+import { Container, Title, Text } from 'liqid-components';
 
 function App() {
   return (

@@ -9,7 +9,6 @@
     "start": "tsx src/main.ts"
   },
   "dependencies": {
-    "@libsql/kysely-libsql": "^0.4.1",
     "express": "^4.21.0",
     "cookie-parser": "^1.4.7",
     "kysely": "^0.27.4",

@@ -1,4 +1,4 @@
-import { Card, Divider, Stack, Text, Title } from "liqid";
+import { Card, Divider, Stack, Text, Title } from "liqid-components";
 import type { ComponentDoc } from "../data/docs";
 
 interface ComponentPageProps {

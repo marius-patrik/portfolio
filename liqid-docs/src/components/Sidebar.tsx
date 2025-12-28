@@ -1,4 +1,4 @@
-import { Card, Stack, Text } from "liqid";
+import { Card, Stack, Text } from "liqid-components";
 import type { ComponentDoc } from "../data/docs";
 
 interface SidebarProps {

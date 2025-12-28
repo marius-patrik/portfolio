@@ -13,7 +13,7 @@
     "react-dom": "^19.0.0",
     "swr": "^2.2.5",
     "wouter": "^3.3.5",
-    "liqid": "file:../../liqid"
+    "liqid": "file:../../../../../../liqid"
   },
   "devDependencies": {
     "@rsbuild/core": "^1.1.0",

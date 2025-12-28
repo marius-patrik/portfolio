@@ -1,6 +1,6 @@
-import { Flex, Footer, Header, Shell } from "liqid";
+import { Flex, Footer, Header, Shell } from "liqid-components";
 import { useState } from "react";
-import "liqid/styles.css";
+import "liqid-components/styles.css";
 import "./App.css";
 import { Sidebar } from "./components/Sidebar";
 import { docs } from "./data/docs";

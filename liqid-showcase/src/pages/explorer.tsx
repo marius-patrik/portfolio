@@ -21,10 +21,10 @@ import { ClockApp } from '../components/Apps/Clock/ClockApp';
 import { Eshop } from '../components/Apps/Eshop/Eshop';
 import { Games } from '../components/Apps/Games/Games';
 import { Messages } from '../components/Apps/Messages/Messages';
-import { Notes } from '../components/Apps/NotesWrapper/Notes';
+import { Notes } from '../components/Apps/Notes/Notes';
 import { Phone } from '../components/Apps/PhoneWrapper/Phone';
 import { Pokedex } from '../components/Apps/PokedexWrapper/Pokedex';
-import { ToDoList } from '../components/Apps/ToDoListWrapper/ToDoList';
+import { ToDoList } from '../components/Apps/ToDoList/ToDoList';
 import { TradeBot } from '../components/Apps/TradeBotWrapper/TradeBot';
 
 const customApps: AppDefinition[] = [

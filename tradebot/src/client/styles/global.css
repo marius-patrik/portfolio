@@ -1,4 +1,4 @@
-@import "liqid/styles.css";
+@import "liqid-components/styles.css";
 
 body {
   @apply font-sans min-h-screen bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 text-slate-100;
