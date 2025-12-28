@@ -1,27 +1,27 @@
-[submodule "Projects/Code/Apps/liqid-docs"]
-	path = Projects/Code/Apps/liqid-docs
+[submodule "Applications/liqid-docs"]
+	path = Applications/liqid-docs
 	url = https://github.com/marius-patrik/liqid-docs.git
-[submodule "Projects/Code/Apps/liqid-showcase"]
-	path = Projects/Code/Apps/liqid-showcase
+[submodule "Applications/liqid-showcase"]
+	path = Applications/liqid-showcase
 	url = https://github.com/marius-patrik/liqid-showcase.git
-[submodule "Projects/Code/Apps/phonebooth"]
-	path = Projects/Code/Apps/phonebooth
+[submodule "Applications/phonebooth"]
+	path = Applications/phonebooth
 	url = https://github.com/marius-patrik/phonebooth.git
-[submodule "Projects/Code/Apps/tradebot"]
-	path = Projects/Code/Apps/tradebot
+[submodule "Applications/tradebot"]
+	path = Applications/tradebot
 	url = https://github.com/marius-patrik/tradebot.git
-[submodule "Projects/Code/Apps/pokedex"]
-	path = Projects/Code/Apps/pokedex
+[submodule "Applications/pokedex"]
+	path = Applications/pokedex
 	url = https://github.com/marius-patrik/pokedex.git
-[submodule "Projects/Code/Libraries/liqid"]
-	path = Projects/Code/Libraries/liqid
+[submodule "Libraries/liqid"]
+	path = Libraries/liqid
 	url = https://github.com/marius-patrik/liqid.git
-[submodule "Projects/Hardware/VRHeadset"]
-	path = Projects/Hardware/VRHeadset
-	url = https://github.com/marius-patrik/VRHeadset.git
-[submodule "Projects/Hardware/SuperHumanRobot"]
-	path = Projects/Hardware/SuperHumanRobot
-	url = https://github.com/marius-patrik/SuperHumanRobot.git
-[submodule "Projects/Hardware/RobotArm"]
-	path = Projects/Hardware/RobotArm
+[submodule "Projects/RobotArm"]
+	path = Projects/RobotArm
 	url = https://github.com/marius-patrik/RobotArm.git
+[submodule "Projects/SuperHumanRobot"]
+	path = Projects/SuperHumanRobot
+	url = https://github.com/marius-patrik/SuperHumanRobot.git
+[submodule "Projects/VRHeadset"]
+	path = Projects/VRHeadset
+	url = https://github.com/marius-patrik/VRHeadset.git

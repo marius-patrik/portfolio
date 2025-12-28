@@ -1,0 +1,100 @@
+@import "liqid/styles.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Global styles */
+*,
+*::before,
+*::after {
+}
+
+html,
+body {
+  height: 100%;
+  font-family:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scale-out {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+@layer base {
+  body {
+    @apply text-gray-900 dark:text-gray-100;
+  }
+}
+
+@layer utilities {
+  .system-overlay {
+    @apply fixed z-3;
+  }
+
+  .icon-small {
+    @apply w-14 h-14 cursor-pointer rounded-xl;
+  }
+
+  .icon-large {
+    @apply w-16 h-16 cursor-pointer rounded-2xl;
+  }
+
+  .hover-scale {
+    @apply hover:scale-105 transition-transform duration-300 ease-in-out;
+  }
+
+  .glass {
+    @apply border backdrop-blur-xs shadow-lg bg-gray-300/20 border-gray-200/10 dark:bg-slate-900/20 dark:border-slate-400/20;
+  }
+
+  .primary {
+    @apply bg-sky-400/50 border border-sky-300/10 backdrop-blur-sm shadow-lg dark:bg-sky-400/50 dark:border-sky-800/10;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.15s ease-out;
+  }
+
+  .animate-scale-out {
+    animation: scale-out 0.15s ease-in forwards;
+  }
+
+  .button {
+    @apply select-none cursor-pointer rounded-2xl;
+  }
+
+  .selected {
+    @apply bg-gray-200/10 border-gray-200/40 dark:bg-gray-500/50 dark:border-gray-500/50 cursor-not-allowed;
+  }
+
+  .highlight-hover {
+    @apply bg-gray-200/20 border-gray-200/50 dark:bg-gray-500/50 dark:border-gray-500/50;
+  }
+
+  .negative {
+    @apply hover:bg-red-500/40 hover:border-red-500/40 dark:hover:bg-red-500/40 dark:hover:border-red-500/40;
+  }
+}

@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Animations */
+@keyframes scale-in {
+	from {
+		transform: scale(0.95);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+@keyframes scale-out {
+	from {
+		transform: scale(1);
+		opacity: 1;
+	}
+	to {
+		transform: scale(0.95);
+		opacity: 0;
+	}
+}
+
+@layer base {
+	html,
+	body {
+		@apply font-stretch-105% text-lg 
+		bg-white text-black 
+		dark:bg-black dark:text-white;
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+			Roboto, sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+}
+
+@layer components {
+	.style-accent {
+		@apply font-semibold text-sky-400;
+	}
+
+	.style-floating {
+		@apply text-zinc-600 text-lg font-normal dark:text-zinc-400;
+	}
+
+	.style-glass {
+		@apply border 
+		bg-zinc-100/60 border-zinc-200/60 
+		shadow-lg backdrop-blur-xs rounded-full hover:scale-101 active:scale-101 transition-transform p-2 
+		dark:bg-zinc-800/60 dark:border-zinc-600/60 
+		hover:bg-zinc-700/60 active:bg-zinc-600/60;
+	}
+
+	.style-glass-highlight {
+		@apply border 
+		bg-zinc-100/60 border-zinc-200/60 
+		shadow-lg backdrop-blur-xs rounded-full hover:scale-101 active:scale-101 transition-transform p-2 
+		dark:bg-sky-400/60 dark:border-sky-500/60 
+		hover:border-zinc-500/60 active:border-zinc-200/60 hover:bg-zinc-500/60 active:bg-zinc-500/60;
+	}
+
+	.style-link {
+		@apply hover:text-black active:text-black 
+		dark:hover:text-white dark:active:text-white
+		text-sky-300 
+		dark:text-sky-300;
+	}
+
+	.style-title {
+		@apply text-black text-lg font-medium dark:text-white;
+	}
+
+	.style-title-center {
+		@apply text-black text-center text-lg mx-auto font-medium dark:text-white;
+	}
+
+	.style-description {
+		@apply text-zinc-600 text-base font-normal dark:text-zinc-400;
+	}
+
+	.style-input {
+		@apply text-xl w-full rounded-md border
+		bg-zinc-300/40 border-zinc-100/10 shadow-lg backdrop-blur-xs
+		hover:scale-101 active:scale-101 transition-transform p-3
+		dark:bg-zinc-950/60 dark:border-zinc-600/30;
+	}
+}
+
+@layer utilities {
+	/* System overlay with z-index suffix support */
+	.system-overlay {
+		@apply fixed z-3;
+	}
+	.system-overlay-10 {
+		@apply fixed z-10;
+	}
+	.system-overlay-20 {
+		@apply fixed z-20;
+	}
+	.system-overlay-30 {
+		@apply fixed z-30;
+	}
+	.system-overlay-40 {
+		@apply fixed z-40;
+	}
+	.system-overlay-50 {
+		@apply fixed z-50;
+	}
+
+	/* Icon sizes */
+	.icon-small {
+		@apply w-14 h-14 cursor-pointer rounded-xl;
+	}
+	.icon-large {
+		@apply w-16 h-16 cursor-pointer rounded-2xl;
+	}
+
+	/* Hover effects */
+	.hover-scale {
+		@apply hover:scale-105 transition-transform duration-300 ease-in-out;
+	}
+
+	/* Glass variants */
+	.glass {
+		@apply border backdrop-blur-xs shadow-lg
+		bg-gray-300/20 border-gray-200/10
+		dark:bg-slate-900/20 dark:border-slate-400/20;
+	}
+
+	.primary {
+		@apply bg-sky-400/50 border border-sky-300/10 backdrop-blur-sm shadow-lg
+		dark:bg-sky-400/50 dark:border-sky-800/10;
+	}
+
+	/* Animations */
+	.animate-scale-in {
+		animation: scale-in 0.15s ease-out;
+	}
+	.animate-scale-out {
+		animation: scale-out 0.15s ease-in forwards;
+	}
+
+	/* Button states */
+	.button {
+		@apply select-none cursor-pointer rounded-2xl;
+	}
+
+	.selected {
+		@apply bg-gray-200/10 border-gray-200/40
+		dark:bg-gray-500/50 dark:border-gray-500/50
+		cursor-not-allowed;
+	}
+
+	.highlight-hover {
+		@apply bg-gray-200/20 border-gray-200/50
+		dark:bg-gray-500/50 dark:border-gray-500/50;
+	}
+
+	.negative {
+		@apply hover:bg-red-500/40 hover:border-red-500/40
+		dark:hover:bg-red-500/40 dark:hover:border-red-500/40;
+	}
+}

@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+
+# Environment files
+.env
+.env.local
+
+# OS files
+.DS_Store
+
+# Logs
+*.log
+
+# Cursor rules (workspace-specific)
+.cursorrules
+
+# Database files
+*.db
+*.sqlite

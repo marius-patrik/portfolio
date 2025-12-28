@@ -1,0 +1,52 @@
+@import "liqid/styles.css";
+
+body {
+  @apply font-sans min-h-screen bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 text-slate-100;
+}
+
+.glass-card {
+  @apply rounded-2xl border border-white/10 backdrop-blur-xl bg-slate-800/70 shadow-xl;
+}
+
+.text-profit {
+  @apply text-green-500;
+}
+
+.text-loss {
+  @apply text-red-500;
+}
+
+.btn {
+  @apply px-6 py-3 rounded-xl font-semibold cursor-pointer border-none transition-all duration-200 ease-in-out;
+}
+
+.btn-primary {
+  @apply bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/30;
+}
+
+.btn-danger {
+  @apply bg-gradient-to-r from-red-600 to-red-500 text-white hover:-translate-y-0.5 hover:shadow-lg hover:shadow-red-500/30;
+}
+
+.input {
+  @apply w-full rounded-xl px-4 py-3 border border-white/10 bg-slate-900/60 text-slate-100 transition-colors duration-200 outline-none focus:border-blue-500;
+}
+
+.chart-container {
+  @apply rounded-2xl overflow-hidden bg-slate-800;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

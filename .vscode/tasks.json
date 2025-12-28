@@ -2,9 +2,9 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Squash All Repos",
+      "label": "pm: Install All",
       "type": "shell",
-      "command": "./.scripts/squash_all.sh",
+      "command": "./.scripts/pm install",
       "problemMatcher": [],
       "presentation": {
         "echo": true,
@@ -16,9 +16,9 @@
       }
     },
     {
-      "label": "Push All Repos",
+      "label": "pm: Build All",
       "type": "shell",
-      "command": "./.scripts/push_all.sh",
+      "command": "./.scripts/pm build",
       "problemMatcher": [],
       "presentation": {
         "echo": true,
@@ -30,9 +30,9 @@
       }
     },
     {
-      "label": "Force Push All Repos",
+      "label": "pm: Lint All",
       "type": "shell",
-      "command": "./.scripts/force_push_all.sh",
+      "command": "./.scripts/pm lint",
       "problemMatcher": [],
       "presentation": {
         "echo": true,
@@ -44,46 +44,51 @@
       }
     },
     {
-      "label": "Start Liqid Components",
+      "label": "pm: Push All",
       "type": "shell",
-      "command": "npm run dev",
-      "options": {
-        "cwd": "${workspaceFolder}/Projects/Code/Libraries/liqid/liqid-components"
-      },
-      "isBackground": true,
-      "problemMatcher": ["$tsc-watch"],
-      "presentation": {
-        "group": "libraries"
-      }
-    },
-    {
-      "label": "Start Liqid UI",
-      "type": "shell",
-      "command": "npm run dev",
-      "options": {
-        "cwd": "${workspaceFolder}/Projects/Code/Libraries/liqid/liqid-ui"
-      },
-      "isBackground": true,
-      "problemMatcher": ["$tsc-watch"],
-      "presentation": {
-        "group": "libraries"
-      }
-    },
-    {
-      "label": "Start All Libraries",
-      "dependsOn": ["Start Liqid Components", "Start Liqid UI"],
+      "command": "./.scripts/pm push",
       "problemMatcher": [],
       "presentation": {
-        "group": "libraries"
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
       }
     },
     {
-      "label": "Start Docs",
+      "label": "pm: Push All (Force)",
       "type": "shell",
-      "command": "npm run dev",
-      "options": {
-        "cwd": "${workspaceFolder}/Projects/Code/Apps/liqid-docs"
-      },
+      "command": "./.scripts/pm push all force",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "pm: Squash All",
+      "type": "shell",
+      "command": "./.scripts/pm squash",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "pm: Run liqid-docs",
+      "type": "shell",
+      "command": "./.scripts/pm run liqid-docs",
       "isBackground": true,
       "problemMatcher": ["$tsc-watch"],
       "presentation": {
@@ -91,12 +96,9 @@
       }
     },
     {
-      "label": "Start Showcase",
+      "label": "pm: Run liqid-showcase",
       "type": "shell",
-      "command": "npm run dev",
-      "options": {
-        "cwd": "${workspaceFolder}/Projects/Code/Apps/liqid-showcase"
-      },
+      "command": "./.scripts/pm run liqid-showcase",
       "isBackground": true,
       "problemMatcher": ["$tsc-watch"],
       "presentation": {
@@ -104,20 +106,25 @@
       }
     },
     {
-      "label": "Start All Apps",
-      "dependsOn": ["Start Docs", "Start Showcase"],
-      "problemMatcher": [],
+      "label": "pm: Run liqid-components",
+      "type": "shell",
+      "command": "./.scripts/pm run liqid-components",
+      "isBackground": true,
+      "problemMatcher": ["$tsc-watch"],
       "presentation": {
-        "group": "apps"
+        "group": "libraries"
       }
     },
     {
-      "label": "Start Everything",
-      "dependsOn": ["Start All Libraries", "Start All Apps"],
-      "problemMatcher": [],
+      "label": "pm: Run liqid-ui",
+      "type": "shell",
+      "command": "./.scripts/pm run liqid-ui",
+      "isBackground": true,
+      "problemMatcher": ["$tsc-watch"],
       "presentation": {
-        "group": "all"
+        "group": "libraries"
       }
     }
   ]
 }
+
