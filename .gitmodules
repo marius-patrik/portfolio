@@ -1,21 +1,21 @@
-[submodule "libraries/plc"]
-	path = libraries/plc
+[submodule "plc"]
+	path = plc
 	url = https://github.com/marius-patrik/plc.git
-[submodule "applications/phonebooth"]
-	path = applications/phonebooth
+[submodule "phonebooth"]
+	path = phonebooth
 	url = https://github.com/marius-patrik/phonebooth.git
-[submodule "applications/tradebot"]
-	path = applications/tradebot
+[submodule "tradebot"]
+	path = tradebot
 	url = https://github.com/marius-patrik/tradebot.git
-[submodule "applications/pokedex"]
-	path = applications/pokedex
+[submodule "pokedex"]
+	path = pokedex
 	url = https://github.com/marius-patrik/pokedex.git
-[submodule "hardware/RobotArm"]
-	path = hardware/RobotArm
+[submodule "RobotArm"]
+	path = RobotArm
 	url = https://github.com/marius-patrik/RobotArm.git
-[submodule "hardware/SuperHumanRobot"]
-	path = hardware/SuperHumanRobot
+[submodule "SuperHumanRobot"]
+	path = SuperHumanRobot
 	url = https://github.com/marius-patrik/SuperHumanRobot.git
-[submodule "hardware/VRHeadset"]
-	path = hardware/VRHeadset
+[submodule "VRHeadset"]
+	path = VRHeadset
 	url = https://github.com/marius-patrik/VRHeadset.git

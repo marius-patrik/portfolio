@@ -1,0 +1,1143 @@
+# Agent Commands Reference
+
+> **IMPORTANT**: This file contains all agent command documentation. For agent behavior and task management instructions, see [.cursorrules](.cursorrules).
+
+## User Command Handling
+
+When the user types specific commands, the agent MUST handle them as follows:
+
+**Note**: Command prefixes can be used at the beginning OR end of the message. For example:
+- `agent: <message>` OR `<message>: agent` - both work the same
+- `todo: <message>` OR `<message>: todo` - both work the same
+- All commands support both formats
+
+**Command Chaining with Semicolons**:
+- When a semicolon (`;`) is used in a command, it means "another thing to do with the same command"
+- Example: `agent: something ; else` is equivalent to `agent: something :then agent: else`
+- Semicolons allow chaining multiple commands in a single message
+- Each command separated by a semicolon is executed sequentially
+- The agent should parse semicolon-separated commands and execute them in order
+
+**Alternative Formats for Update Commands**:
+- `update: code` OR `:update code` - equivalent to `updatecode:` or `:updatecode`
+- `updatecode:` OR `:updatecode` OR `update: code` OR `:update code` - all work the same
+- This pattern applies to other update commands as well
+
+### `agent: <message>` or `<message>: agent`
+
+**Action**: Add the message to .cursorrules
+
+**Process**:
+1. Read the current .cursorrules file
+2. Determine the appropriate section for the new instruction
+3. Append the new instruction to that section
+4. Maintain the document structure and formatting
+5. Ensure the instruction is clear and actionable
+
+**Example**:
+- User types: `agent: Always use functional components, never class components`
+- Agent adds this to the "Code Standards" section of .cursorrules
+
+### `project: <message>` or `<message>: project`
+
+**Action**: Add the message to PROJECT.md
+
+**Process**:
+1. Read the current PROJECT.md file
+2. Determine the appropriate section for the new guideline
+3. Append the new guideline to that section
+4. Maintain the document structure and formatting
+5. Ensure the guideline is clear and actionable
+
+**Example**:
+- User types: `project: All components must support dark mode`
+- Agent adds this to the appropriate section in PROJECT.md
+
+### `command: <commandname> <commandpurpose>` or `<commandname> <commandpurpose>: command`
+
+**Action**: Add a new command to COMMANDS.md with the specified name and purpose
+
+**Parameters**:
+- **First parameter (`commandname`)**: The name of the command (e.g., `test`, `build`, `deploy`)
+- **Second parameter (`commandpurpose`)**: A brief description of what the command does
+
+**Process**:
+1. Read the current COMMANDS.md file
+2. Find the appropriate section in COMMANDS.md
+3. Add a new command entry following the existing format
+4. Include:
+   - Command name with format variations (with/without colons, prefix/suffix)
+   - Action description
+   - Process steps
+   - Example usage
+5. Update the help section to include the new command
+6. Ensure the command documentation follows the same structure as existing commands
+
+**Example**:
+- User types: `command: test Run all test suites`
+- Agent adds a new `test:` command section with documentation that runs all test suites
+
+**Note**: Commands should follow the existing pattern:
+- Support both prefix and suffix formats: `command: <args>` or `<args>: command`
+- Include detailed process steps
+- Include usage examples
+- Be added to the help section
+
+### `todo: <message>` or `<message>: todo`
+
+**Action**: Add the message to TODO.md
+
+**Process**:
+1. Read the current TODO.md file
+2. Add a new task with status ⬜ (pending)
+3. Follow the existing TODO format and structure
+4. Place the new task in the appropriate section
+
+**Example**:
+- User types: `todo: Add dark mode toggle to settings`
+- Agent adds: `- ⬜ Add dark mode toggle to settings` to TODO.md
+
+### `task: <message>` or `<message>: task`
+
+**Action**: Add the task to TODO.md and begin executing it immediately
+
+**Process**:
+1. Read the current TODO.md file
+2. Add a new task with status 🔄 (in progress)
+3. Follow the existing TODO format and structure
+4. Place the new task in the appropriate section
+5. **IMMEDIATELY** begin working on the task
+6. Plan out the implementation steps before proceeding
+7. Prompt the user with the plan if the task is complex (3+ steps)
+8. Wait for user confirmation before executing complex tasks
+9. Mark the task as ✅ (completed) when finished, after all quality checks pass
+
+**Example**:
+- User types: `task: Add dark mode toggle to settings`
+- Agent adds: `- 🔄 Add dark mode toggle to settings` to TODO.md
+- Agent plans the implementation
+- Agent prompts user with the plan if complex
+- Agent begins execution after confirmation
+- Agent marks as ✅ when complete
+
+### `now: <message>` or `<message>: now`
+
+**Action**: Execute the task immediately without adding it to TODO.md
+
+**Process**:
+1. **DO NOT** add the task to TODO.md
+2. **IMMEDIATELY** begin working on the task
+3. Plan out the implementation steps before proceeding
+4. Prompt the user with the plan if the task is complex (3+ steps)
+5. Wait for user confirmation before executing complex tasks
+6. Complete all quality checks (lint, build, test) but skip TODO.md updates
+7. The task is considered complete when all quality checks pass
+
+**Example**:
+- User types: `now: Fix typo in Button component`
+- Agent does NOT add to TODO.md
+- Agent plans the implementation
+- Agent prompts user with the plan if complex
+- Agent begins execution after confirmation
+- Agent completes quality checks but does not update TODO.md
+
+### `qna: <question>` or `<question>: qna`
+
+**Action**: Answer the user's question directly without making any code changes
+
+**Process**:
+1. Read and understand the user's question
+2. Search the codebase if needed to find relevant information
+3. Provide a clear, helpful answer
+4. Do NOT make any code changes or edits
+5. Do NOT run any build or lint commands
+6. Simply answer the question based on the codebase and documentation
+
+**Example**:
+- User types: `qna: How do I use the Button component?` OR `How do I use the Button component?: qna`
+- Agent provides an answer explaining Button component usage without making any changes
+
+### `then: <command>` or `:then <command>` or `<command>: then`
+
+**Action**: Explicitly chain together agent commands, executing the next command after the previous one completes
+
+**Process**:
+1. Parse the command that follows `then:` or `:then`
+2. Wait for the previous command to complete fully (including all quality checks)
+3. Execute the next command in sequence
+4. Continue this pattern if multiple `then:` commands are chained
+5. Each command in the chain must complete before the next one begins
+6. All commands in the chain follow their normal execution rules (including todo tracking unless `:now` is used)
+
+**Note**: This command is primarily used for explicit chaining. Semicolons (`;`) provide a more concise syntax for the same functionality.
+
+**Example**:
+- User types: `agent: something :then agent: else`
+- Agent executes `agent: something` first, then executes `agent: else` after the first completes
+- This is equivalent to: `agent: something ; else`
+
+**Alternative Usage**:
+- `then: check:` - Run check after previous command
+- `update: docs :then check:` - Update docs, then run check
+- `clean: :then updatecode:` - Clean code, then update code
+
+### `check:` or `:check`
+
+**Action**: Run all lints and builds across all packages and fix all issues until there are none
+
+**Process**:
+1. **MANDATORY**: Run lint for all packages (liqid, desktop, docs, app, page)
+2. Fix ALL linting issues found in any package
+3. Re-run lint after fixes to verify all issues are resolved
+4. **MANDATORY**: Run build for all packages (liqid, desktop, docs, app, page)
+5. Fix ALL build errors found in any package
+6. Re-run build after fixes to verify all builds succeed
+7. Repeat steps 1-6 until:
+   - ALL linting passes with zero errors
+   - ALL builds succeed with zero errors
+8. Do NOT proceed until ALL packages pass both lint and build with zero errors
+9. Report the final status: all packages passing or list any remaining issues
+
+**Execution Order**:
+1. Run `npm run lint` in root (runs lint for all packages)
+2. Fix any linting issues found
+3. Run `npm run build:lib` (build liqid first as other packages depend on it)
+4. Fix any build errors in liqid
+5. Run `npm run build` in root (builds all packages)
+6. Fix any build errors in other packages
+7. Repeat until all pass
+
+**Example**:
+- User types: `check:` OR `:check`
+- Agent runs all lints, fixes issues, runs all builds, fixes issues, repeats until everything passes
+
+### `update:` or `:update` or `update: <target>` or `:update <target>`
+
+**Action**: Update documentation, code, project guidelines, or commands based on target parameter
+
+**Parameters**:
+- **First parameter (`target`)**: Optional target specification. Defaults to `docs` if omitted.
+  - `docs` (or omitted) - Update all documentation files (default)
+  - `code` - Analyze and improve codebase (equivalent to `updatecode:`)
+  - `project` - Update PROJECT.md guidelines (equivalent to `updateproject:`)
+  - `commands` - Update command documentation in COMMANDS.md (equivalent to `updatecommands:`)
+
+**Note**: 
+- `update:` or `:update` (without arguments) defaults to documentation update (`update: docs`)
+- `update: docs` or `:update docs` explicitly specifies documentation update
+- `update: code` or `:update code` is equivalent to `updatecode:` (see below)
+- `update: project` or `:update project` is equivalent to `updateproject:` (see below)
+- `update: commands` or `:update commands` is equivalent to `updatecommands:` (see below)
+
+**When target is `docs` (default)**:
+
+**Process**:
+1. **MANDATORY**: Read all documentation files:
+   - PROJECT.md (project guidelines and standards)
+   - README.md (root readme)
+   - TODO.md (task tracking and progress)
+   - All package README files (liqid/README.md, docs/README.md, desktop/README.md, etc.)
+   - Component documentation in docs package (docs/src/data/*.ts files)
+   - liqid/CONFIG.md (if exists)
+   - .cursorrules (agent instructions)
+   - COMMANDS.md (command documentation)
+
+2. **Analyze Project Progress**:
+   - Review TODO.md to identify completed tasks and current status
+   - Compare documented features/components with actual implementations
+   - Check for inconsistencies between documentation and code
+   - Identify missing documentation for new features/components
+   - Verify that component APIs match their documentation
+   - Check that code examples in docs match actual usage
+   - Verify package structure matches documented architecture
+
+3. **Analyze Codebase**:
+   - Review component implementations in liqid/src/components/
+   - Compare with component documentation in docs/src/data/
+   - Check for new components that aren't documented
+   - Verify prop interfaces match documentation
+   - Check for deprecated features that should be removed from docs
+   - Verify exported components match index.ts exports
+
+4. **Update Documentation**:
+   - Update README.md if project structure, dependencies, or usage has changed
+   - Update PROJECT.md if guidelines, standards, or architecture have changed
+   - Update component documentation in docs/src/data/ if component APIs have changed
+   - Update package READMEs if package-specific information has changed
+   - Add documentation for new components or features
+   - Remove documentation for deprecated features
+   - Fix any inconsistencies or outdated information
+   - Ensure all code examples are accurate and functional
+
+5. **Report Findings**:
+   - Summarize what documentation was reviewed
+   - List any updates made
+   - Identify any areas that need attention but couldn't be auto-updated
+   - Provide recommendations for further documentation improvements
+
+**Execution Order**:
+1. Read all documentation files (PROJECT.md, README.md, TODO.md, package READMEs, etc.)
+2. Read component documentation (docs/src/data/*.ts)
+3. Review component implementations (liqid/src/components/*.tsx)
+4. Compare documentation with actual code
+5. Identify discrepancies and missing documentation
+6. Update documentation files as needed
+7. Report summary of changes and findings
+
+**Important Notes**:
+- Do NOT modify code implementations, only documentation
+- Do NOT run lint or build commands (use `check:` for that)
+- Focus on accuracy and completeness of documentation
+- Preserve existing documentation structure and formatting
+- Ensure documentation reflects the current state of the project
+
+**Examples**:
+- `update:` OR `:update` OR `update: docs` OR `:update docs` - Updates all documentation files
+- `update: code` OR `:update code` - Delegates to `updatecode:` command (analyzes and improves codebase)
+- `update: project` OR `:update project` - Delegates to `updateproject:` command (updates PROJECT.md)
+- `update: commands` OR `:update commands` - Delegates to `updatecommands:` command (updates command documentation)
+
+**Note**: When a target is specified, the `update:` command delegates to the corresponding specific command (updatecode:, updateproject:, or updatecommands:). When no target is specified or target is `docs`, it follows the process described above.
+
+### `updatecode:` or `:updatecode` or `update: code` or `:update code`
+
+**Action**: Analyze the codebase for code quality issues, simplifications, cleanup opportunities, unfinished code, and improvements
+
+**Process**:
+1. **Scan for TODOs and Notes**:
+   - Search for TODO, FIXME, XXX, HACK, BUG, NOTE comments
+   - Identify unfinished code or placeholder implementations
+   - Categorize items by priority and type
+
+2. **Identify Code Duplication**:
+   - Look for repeated code patterns across components
+   - Find opportunities to extract shared logic into utilities or hooks
+   - Identify duplicate state initialization or similar patterns
+
+3. **Find Simplification Opportunities**:
+   - Review complex logic that could be simplified
+   - Look for unnecessary abstractions or over-engineering
+   - Identify code that violates project guidelines (e.g., using vanilla HTML/React components when liqid alternatives exist)
+
+4. **Check Code Consistency**:
+   - Verify all components follow the same patterns
+   - Check for inconsistent prop handling
+   - Ensure styling prop usage is consistent
+   - Verify component structure follows established patterns
+
+5. **Type Safety Review**:
+   - Check for `any` types that should be properly typed
+   - Verify all components have proper TypeScript interfaces
+   - Look for missing type definitions
+
+6. **Project Guideline Violations**:
+   - Check for vanilla HTML/React components when liqid alternatives exist
+   - Verify Tailwind is only used in liqid package
+   - Ensure components use `themeStyle` prop correctly
+   - Check that all apps use only liqid components
+
+7. **Report Findings**:
+   - List all identified issues with file paths and line numbers
+   - Categorize by priority (critical, high, medium, low)
+   - Suggest specific improvements
+   - Optionally fix minor issues automatically (like replacing vanilla buttons with liqid Button)
+
+8. **Optional Auto-fix**:
+   - For simple fixes (e.g., replacing vanilla buttons with liqid Button), fix automatically
+   - For complex refactoring, report and wait for approval
+   - Always run lint and build after auto-fixes
+
+**Execution Order**:
+1. Scan codebase for TODOs/FIXMEs and code comments
+2. Analyze component implementations for duplication
+3. Check for guideline violations
+4. Review type safety
+5. Identify simplification opportunities
+6. Generate report of findings
+7. Auto-fix simple issues (if appropriate)
+8. Run lint and build to verify fixes
+
+**Important Notes**:
+- Focus on actionable improvements
+- Prioritize violations of project guidelines
+- Some TODOs might be intentional notes, not bugs
+- Always test changes after refactoring
+- Report findings even if not all can be auto-fixed
+
+**Example**:
+- User types: `updatecode:` OR `:updatecode` OR `update: code` OR `:update code`
+- Agent scans codebase, identifies Modal using vanilla buttons, WindowManager having duplicate code, finds TODOs, reports findings, and fixes issues automatically where appropriate
+
+**Note**: All of these formats are equivalent:
+- `updatecode:` or `:updatecode` (original format)
+- `update: code` or `:update code` (alternative format with space)
+
+### `updateproject:` or `:updateproject` or `update: project` or `:update project` or `projectupdate:` or `:projectupdate`
+
+**Action**: Analyze and update PROJECT.md with current project state, guidelines, and standards
+
+**Process**:
+1. **MANDATORY**: Read PROJECT.md file completely
+2. **MANDATORY**: Read current codebase to understand actual implementation:
+   - Review component implementations in liqid/src/components/
+   - Review package structure and organization
+   - Check build configurations
+   - Review code standards and patterns actually in use
+   - Check for any new patterns or conventions that have emerged
+
+3. **Analyze Current State**:
+   - Compare documented guidelines with actual codebase practices
+   - Identify discrepancies between PROJECT.md and actual implementation
+   - Check for missing guidelines for current patterns
+   - Identify outdated guidelines that no longer apply
+   - Verify that documented architecture matches actual structure
+
+4. **Update PROJECT.md**:
+   - Update any outdated information
+   - Add missing guidelines for current patterns
+   - Remove or update deprecated guidelines
+   - Ensure all documented standards match actual codebase
+   - Update examples to reflect current usage
+   - Fix any inconsistencies or contradictions
+
+5. **Report Findings**:
+   - Summarize what was reviewed
+   - List all updates made
+   - Identify any areas that need attention but couldn't be auto-updated
+   - Provide recommendations for further improvements
+
+**Execution Order**:
+1. Read PROJECT.md
+2. Analyze codebase structure and patterns
+3. Compare documented guidelines with actual code
+4. Identify discrepancies and missing information
+5. Update PROJECT.md as needed
+6. Report summary of changes
+
+**Important Notes**:
+- Do NOT modify code implementations, only PROJECT.md
+- Do NOT run lint or build commands (use `check:` for that)
+- Focus on accuracy and completeness of project guidelines
+- Preserve existing documentation structure and formatting
+- Ensure guidelines reflect the current state of the project
+
+**Example**:
+- User types: `updateproject:` OR `:updateproject` OR `update: project` OR `:update project` OR `projectupdate:` OR `:projectupdate`
+- Agent reads PROJECT.md, analyzes codebase, compares with documentation, updates PROJECT.md if needed, and reports findings
+
+**Note**: All of these formats are equivalent:
+- `updateproject:` or `:updateproject` (original format)
+- `update: project` or `:update project` (alternative format with space)
+- `projectupdate:` or `:projectupdate` (alternative format)
+
+### `update: commands` or `:update commands` or `updatecommands:` or `:updatecommands`
+
+**Action**: Update command documentation in COMMANDS.md to ensure all commands are properly documented
+
+**Process**:
+1. **MANDATORY**: Read the entire COMMANDS.md file
+2. **MANDATORY**: Read COMMANDS.md to identify all documented commands
+3. **MANDATORY**: Identify any commands that are mentioned but not fully documented
+4. **Analyze Command Documentation**:
+   - Check if all commands have complete documentation
+   - Verify that command formats (with/without spaces, prefixes) are documented
+   - Ensure all command parameters are documented (especially second parameters for commands like `update: <target>` and `help: <command>`)
+   - Check for consistency in documentation format
+   - Verify examples are provided for all commands
+
+5. **Update Command Documentation**:
+   - Add missing command documentation
+   - Document all command formats and variations
+   - Ensure second parameters are clearly documented (e.g., `update: docs`, `update: code`, `update: project`, `update: commands`, `help: <command>`)
+   - Add examples where missing
+   - Ensure consistent formatting across all command documentation
+   - Update the help section to include all commands
+
+6. **Report Findings**:
+   - List any commands that were undocumented
+   - List any documentation improvements made
+   - Note any inconsistencies that were fixed
+
+**Execution Order**:
+1. Read COMMANDS.md file
+2. Identify all commands (documented and undocumented)
+3. Analyze documentation completeness
+4. Update documentation as needed
+5. Update help section
+6. Report summary of changes
+
+**Important Notes**:
+- Do NOT modify command implementations, only documentation
+- Do NOT run lint or build commands (use `check:` for that)
+- Focus on completeness and accuracy of command documentation
+- Preserve existing documentation structure and formatting
+- Ensure all command formats and parameters are clearly documented
+
+**Example**:
+- User types: `update: commands` OR `:update commands` OR `updatecommands:` OR `:updatecommands`
+- Agent reads COMMANDS.md, analyzes command documentation, ensures all commands and parameters are documented, updates documentation if needed, and reports findings
+
+**Note**: All of these formats are equivalent:
+- `updatecommands:` or `:updatecommands` (original format)
+- `update: commands` or `:update commands` (alternative format with space)
+
+### `clean:` or `:clean`
+
+**Action**: Clean up code by removing unused code, imports, variables, console statements, and other cleanup tasks
+
+**Process**:
+1. **Remove Unused Imports**:
+   - Scan all files for unused imports
+   - Remove imports that are not used in the file
+   - Verify imports are actually unused before removing
+
+2. **Remove Unused Variables and Code**:
+   - Identify unused variables, functions, and constants
+   - Remove dead code that is never called
+   - Be careful not to remove code that might be used dynamically or through reflection
+
+3. **Remove Console Statements**:
+   - Find and remove `console.log`, `console.debug`, `console.warn`, `console.error` statements (unless they're intentional for debugging)
+   - Keep console statements that are part of error handling or intentional logging
+   - Report any console statements found for review
+
+4. **Format Code**:
+   - Ensure code follows project formatting standards
+   - Run formatter if available (e.g., Biome formatter)
+   - Fix indentation and spacing issues
+
+5. **Remove Temporary Files**:
+   - Clean up temporary files and build artifacts if requested
+   - Remove `.DS_Store` files
+   - Clean up test artifacts if appropriate
+
+6. **Remove Empty Files and Directories**:
+   - Identify and report empty files
+   - Remove empty directories if they're not needed
+
+7. **Fix Code Style Issues**:
+   - Fix simple style issues (trailing whitespace, etc.)
+   - Ensure consistent code style across files
+
+8. **Report Findings**:
+   - List all cleanup actions taken
+   - Report any items that need manual review
+   - Show summary of what was cleaned
+
+**Execution Order**:
+1. Scan codebase for unused imports
+2. Remove unused imports
+3. Scan for unused variables and dead code
+4. Remove unused code (with caution)
+5. Find and remove console statements
+6. Format code
+7. Clean up temporary files
+8. Run lint to verify cleanup didn't break anything
+9. Run build to ensure everything still works
+10. Report summary of cleanup actions
+
+**Important Notes**:
+- Be cautious when removing code - verify it's truly unused
+- Don't remove code that might be used dynamically
+- Keep intentional console statements for error handling
+- Always run lint and build after cleanup to verify nothing broke
+- Report any questionable items for manual review
+- Focus on safe, automated cleanup tasks
+
+**Example**:
+- User types: `clean:` OR `:clean`
+- Agent scans codebase, removes unused imports, removes console.logs, formats code, runs lint and build to verify, and reports cleanup summary
+
+### `agent: update agent` or `:agent update agent` or `:updateagent` or `:agentupdate` or `agent update: agent` or `agentupdate:`
+
+**Action**: Review, validate, and update instruction files to ensure they are comprehensive, non-redundant, logically organized, and accurately describe the codebase
+
+**Note**: All of these formats are equivalent:
+- `agent: update agent` or `:agent update agent` (with spaces)
+- `:updateagent` or `:agentupdate` (no spaces)
+- `agent update: agent` or `agentupdate:` (alternative formats)
+- Commands can be at the beginning or end of the message
+
+**Process**:
+1. **Read All Instruction Files**:
+   - .cursorrules (agent instructions)
+   - PROJECT.md (project guidelines and standards)
+   - README.md (root readme)
+   - TODO.md (task tracking)
+   - All package README files (liqid/README.md, docs/README.md, liqid-types/README.md, etc.)
+   - liqid/CONFIG.md (if exists)
+   - COMMANDS.md (command documentation)
+   - Any other documentation files
+
+2. **Analyze Codebase Structure**:
+   - Review all components in liqid/src/components/
+   - Review all hooks in liqid/src/hooks/
+   - Review all types in liqid/src/types/ and liqid-types/src/
+   - Review exports in liqid/src/index.ts
+   - Review package.json files for dependencies and scripts
+   - Review build configurations (rslib.config.ts, rsbuild.config.ts, etc.)
+   - Review component documentation in docs/src/data/
+   - Understand the monorepo structure and package relationships
+
+3. **Check for Redundancy**:
+   - Identify duplicate information across files
+   - Find repeated instructions or guidelines
+   - Consolidate redundant sections
+   - Ensure each piece of information appears in the most appropriate location
+
+4. **Validate Logical Flow**:
+   - Ensure instructions make sense from top to bottom
+   - Check that sections are in logical order
+   - Verify that prerequisites are mentioned before they're needed
+   - Ensure related information is grouped together
+   - Check that examples follow the instructions they demonstrate
+
+5. **Verify Completeness**:
+   - Ensure all components are documented
+   - Verify all hooks are mentioned
+   - Check that all types are described
+   - Ensure all build commands are documented
+   - Verify all project guidelines are covered
+   - Check that all packages are described
+   - Ensure all key features are documented
+
+6. **Update Documentation**:
+   - Update .cursorrules to reflect current codebase structure
+   - Update PROJECT.md with accurate component lists, hooks, types, and architecture
+   - Update README.md with current installation, usage, and project structure
+   - Update package READMEs with accurate information
+   - Add missing documentation for new components, hooks, or features
+   - Remove outdated information
+   - Fix inconsistencies between files
+   - Ensure codebase descriptions are detailed and up-to-date
+
+7. **Improve Organization**:
+   - Reorganize sections for better flow
+   - Group related information together
+   - Ensure clear hierarchy and structure
+   - Add table of contents if helpful
+   - Improve section headings for clarity
+
+8. **Report Findings**:
+   - Summarize what was reviewed
+   - List all updates made
+   - Identify any areas that need manual attention
+   - Report any redundancies removed
+   - Report any organizational improvements made
+
+**Execution Order**:
+1. Read all instruction and documentation files
+2. Analyze codebase structure (components, hooks, types, exports, configs)
+3. Compare documentation with actual codebase
+4. Identify redundancies, gaps, and inconsistencies
+5. Reorganize and update instruction files
+6. Verify logical flow and completeness
+7. Report summary of changes and improvements
+
+**Important Notes**:
+- Focus on making instruction files comprehensive and accurate
+- Remove redundancy while maintaining clarity
+- Ensure instructions flow logically from top to bottom
+- Keep codebase descriptions detailed and current
+- Preserve important information while improving organization
+- Do NOT modify code implementations, only documentation
+- Do NOT run lint or build commands (use `check:` for that)
+
+**Example**:
+- User types: `agent: update agent` OR `:updateagent` OR `:agent update agent` OR `agentupdate:`
+- Agent reads all instruction files, analyzes codebase structure, identifies redundancies and gaps, reorganizes files for better flow, updates with current codebase details, and reports all improvements made
+
+**Note**: All of these formats are equivalent:
+- `agent: update agent` or `:agent update agent` (with spaces)
+- `:updateagent` or `:agentupdate` (no spaces)
+- `agent update: agent` or `agentupdate:` (alternative formats)
+
+### `organize:` or `:organize`
+
+**Action**: Organize and restructure code by improving file structure, grouping related code, and ensuring consistent organization patterns
+
+**Process**:
+1. **Analyze Current Structure**:
+   - Review directory structure across all packages
+   - Identify files that are in incorrect locations
+   - Find code that should be grouped together
+   - Check for inconsistent naming patterns
+   - Identify components that should be moved to better locations
+
+2. **Identify Organization Issues**:
+   - Files in wrong directories (e.g., utilities in component folders)
+   - Components that should be grouped by feature/domain
+   - Duplicate or similar code that should be consolidated
+   - Missing directory structure for better organization
+   - Inconsistent file naming conventions
+   - Related files that are scattered across directories
+
+3. **Plan Restructuring**:
+   - Create a plan for file moves and reorganization
+   - Identify dependencies that will be affected
+   - Plan import path updates needed
+   - Consider package boundaries and dependencies
+   - Ensure restructuring maintains functionality
+
+4. **Reorganize Files**:
+   - Move files to appropriate directories
+   - Create new directory structures if needed
+   - Group related components, utilities, and types together
+   - Ensure consistent naming patterns (kebab-case, PascalCase, etc.)
+   - Organize by feature/domain when appropriate
+
+5. **Update Imports**:
+   - Update all import statements to reflect new file locations
+   - Fix broken imports across all affected files
+   - Update index.ts files to export from new locations
+   - Verify all imports are correct
+
+6. **Verify Structure**:
+   - Ensure directory structure follows project conventions
+   - Verify files are logically organized
+   - Check that related code is grouped together
+   - Ensure consistent naming across the codebase
+
+7. **Report Changes**:
+   - List all files that were moved or reorganized
+   - Document the new structure
+   - Explain the reasoning for reorganization
+   - Note any breaking changes or migration needed
+
+**Execution Order**:
+1. Analyze current directory structure and file organization
+2. Identify organization issues and improvement opportunities
+3. Create a restructuring plan
+4. Present plan to user for approval (if significant changes)
+5. Move files to appropriate locations
+6. Update all import statements
+7. Update index.ts files and exports
+8. Run lint to verify imports are correct
+9. Run build to ensure nothing broke
+10. Report summary of reorganization
+
+**Important Notes**:
+- Focus on logical organization and maintainability
+- Preserve functionality during reorganization
+- Update all imports and exports after moving files
+- Follow project conventions for directory structure
+- Group related code together (components, utilities, types, etc.)
+- Consider package boundaries and dependencies
+- Always run lint and build after reorganization
+- Present significant restructuring plans to user for approval
+
+**Example**:
+- User types: `organize:` OR `:organize`
+- Agent analyzes structure, identifies components that should be grouped, creates a plan, moves files to better locations, updates all imports, runs lint and build, and reports reorganization summary
+
+### `workflow:` or `:workflow`
+
+**Action**: Run all maintenance commands sequentially in a sensible order to perform comprehensive codebase maintenance
+
+**Process**:
+1. **Execute Commands in This Order**:
+   - **Step 1**: Run `plan:` - Plan out next development steps and document them in TODO.md
+   - **Step 2**: Run `clean:` - Clean up unused code, imports, console statements
+   - **Step 3**: Run `updatecode:` - Analyze code quality, find improvements, fix simple issues
+   - **Step 4**: Run `organize:` - Organize file structure and code organization
+   - **Step 5**: Run `check:` - Run all lints and builds, fix all issues
+   - **Step 6**: Run `update: project` - Update PROJECT.md with current state
+   - **Step 7**: Run `update: docs` - Update all documentation files
+   - **Step 8**: Run `update: commands` - Update command documentation
+
+2. **Command Execution Rules**:
+   - Execute each command fully before moving to the next
+   - If a command fails, report the failure but continue with remaining commands
+   - Each command should complete its full process including quality checks
+   - Report status after each command completes
+
+3. **Report Summary**:
+   - List all commands executed
+   - Report status of each command (success/failure)
+   - Summarize overall workflow completion
+   - Note any issues or failures that occurred
+
+**Execution Order** (Detailed):
+1. `plan:` - Plan next development steps and document in TODO.md
+2. `clean:` - Clean unused code and imports
+3. `updatecode:` - Improve code quality (will run lint/build internally if auto-fixing)
+4. `organize:` - Reorganize code structure (will run lint/build internally)
+5. `check:` - Final comprehensive lint and build check across all packages
+6. `update: project` - Update PROJECT.md guidelines
+7. `update: docs` - Update all documentation files
+8. `update: commands` - Update command documentation in COMMANDS.md
+
+**Important Notes**:
+- This workflow is comprehensive and may take significant time
+- Each command maintains its own quality checks
+- The `check:` step ensures final verification after all changes
+- Documentation updates come after code changes are complete
+- Commands that modify code run before documentation updates
+- Planning step helps identify and document next steps before maintenance
+
+**Example**:
+- User types: `workflow:` OR `:workflow`
+- Agent executes: plan → clean → updatecode → organize → check → update project → update docs → update commands
+- Agent reports summary of all commands executed
+
+**Note**: This command provides a complete maintenance workflow. For specific tasks, use individual commands instead.
+
+### `streamline:` or `:streamline` or `streamline: <targets>` or `:streamline <targets>`
+
+**Action**: Streamline and update specific areas of the codebase based on target parameters
+
+**Parameters**:
+- **First parameter (`targets`)**: One or more comma-separated targets to streamline. If omitted, defaults to all targets.
+  - `code` - Streamline code quality, remove duplication, fix issues
+  - `docs` - Streamline documentation, ensure consistency and completeness
+  - `todo` - Streamline TODO.md, organize tasks, remove completed items, prioritize
+  - `project` - Streamline PROJECT.md, update guidelines, ensure accuracy
+  - `commands` - Streamline COMMANDS.md, ensure all commands are documented
+  - `all` (or omitted) - Streamline all targets in sequence
+
+**Process**:
+1. **Parse Targets**:
+   - If no targets specified, default to `all`
+   - Parse comma-separated targets (e.g., `streamline: code, docs, todo`)
+   - Validate targets are recognized
+   - If `all` is specified, include all targets
+
+2. **Execute Based on Targets**:
+   - **For `code` target**:
+     - Run `updatecode:` to analyze and improve code quality
+     - Run `clean:` to remove unused code and imports
+     - Run `organize:` to improve code organization
+     - Run `check:` to verify lint and build pass
+   
+   - **For `docs` target**:
+     - Run `update: docs` to update all documentation files
+     - Ensure documentation is consistent and complete
+     - Verify examples are accurate
+   
+   - **For `todo` target**:
+     - Read TODO.md
+     - Remove or archive completed tasks that are no longer relevant
+     - Organize tasks by priority and dependencies
+     - Consolidate duplicate or similar tasks
+     - Ensure task descriptions are clear and actionable
+     - Update task statuses if needed
+     - Report changes made
+   
+   - **For `project` target**:
+     - Run `update: project` to update PROJECT.md
+     - Ensure guidelines are current and accurate
+     - Remove outdated information
+   
+   - **For `commands` target**:
+     - Run `update: commands` to update COMMANDS.md
+     - Ensure all commands are properly documented
+     - Verify command examples are accurate
+
+3. **Execution Order**:
+   - Execute targets in logical order: `code` → `todo` → `project` → `docs` → `commands`
+   - Each target completes fully before moving to the next
+   - Report status after each target completes
+
+4. **Report Summary**:
+   - List all targets processed
+   - Report status of each target (success/failure)
+   - Summarize changes made
+   - Note any issues or recommendations
+
+**Execution Order** (When `all` or multiple targets):
+1. `code` - Streamline code (updatecode → clean → organize → check)
+2. `todo` - Streamline TODO.md
+3. `project` - Streamline PROJECT.md
+4. `docs` - Streamline documentation
+5. `commands` - Streamline COMMANDS.md
+
+**Important Notes**:
+- Targets can be specified individually or in combination
+- Each target maintains its own quality checks
+- Code-related targets run before documentation targets
+- TODO streamlining helps maintain organized task tracking
+- Use specific targets for focused updates, use `all` for comprehensive streamlining
+
+**Examples**:
+- `streamline:` OR `:streamline` OR `streamline: all` - Streamline all targets
+- `streamline: code` - Streamline only code quality
+- `streamline: docs, todo` - Streamline documentation and TODO.md
+- `streamline: code, docs, project` - Streamline code, docs, and project guidelines
+
+**Example**:
+- User types: `streamline: code, docs` OR `:streamline code, docs`
+- Agent executes code streamlining (updatecode → clean → organize → check), then documentation streamlining (update: docs), and reports summary
+
+### `plan:` or `:plan`
+
+**Action**: Plan out next development steps and document them in TODO.md
+
+**Process**:
+1. **MANDATORY**: Read TODO.md to understand current tasks and status
+2. **MANDATORY**: Read PROJECT.md to understand project guidelines and standards
+3. **MANDATORY**: Read README.md to understand project overview and structure
+4. **Analyze Current State**:
+   - Review pending tasks in TODO.md
+   - Identify completed tasks and current progress
+   - Check for any blockers or dependencies
+   - Review "Active Checks" section for ongoing requirements
+   - Review "End of Development" section for release-related tasks
+5. **Plan Development Steps**:
+   - Identify logical next steps based on current state
+   - Break down complex tasks into actionable steps
+   - Prioritize tasks based on dependencies and importance
+   - Consider project guidelines and standards when planning
+   - Identify any prerequisites or dependencies
+6. **Document Plan in TODO.md**:
+   - Add planned development steps to TODO.md
+   - Use clear, descriptive task descriptions
+   - Mark tasks with status ⬜ (pending)
+   - Place tasks in appropriate sections (Tasks, Active Checks, End of Development)
+   - Group related tasks together
+   - Include any dependencies or prerequisites in task descriptions
+7. **Report Plan**:
+   - Summarize the planned development steps
+   - Explain the reasoning behind the plan
+   - Highlight any dependencies or prerequisites
+   - Note any considerations or constraints
+
+**Execution Order**:
+1. Read TODO.md, PROJECT.md, and README.md
+2. Analyze current project state and pending tasks
+3. Plan logical next development steps
+4. Document plan in TODO.md
+5. Report summary of planned steps
+
+**Important Notes**:
+- Do NOT execute tasks, only plan and document them
+- Focus on logical, actionable development steps
+- Consider dependencies and prerequisites when planning
+- Follow TODO.md structure and formatting
+- Ensure planned tasks are clear and actionable
+
+**Example**:
+- User types: `plan:` OR `:plan`
+- Agent reads TODO.md, PROJECT.md, and README.md, analyzes current state, plans next development steps, documents them in TODO.md, and reports the plan
+
+### `next:` or `:next`
+
+**Action**: Plan out todo items and start executing them via task
+
+**Process**:
+1. **MANDATORY**: Read TODO.md to identify pending tasks
+2. **MANDATORY**: Read PROJECT.md to understand project guidelines
+3. **Analyze Pending Tasks**:
+   - Review all tasks with status ⬜ (pending) in TODO.md
+   - Identify the most logical next task(s) to work on
+   - Check for dependencies or prerequisites
+   - Consider task priority and complexity
+   - Review "Active Checks" section for ongoing requirements
+4. **Plan Task Execution**:
+   - Select the next task(s) to execute
+   - Break down complex tasks into actionable steps
+   - Identify any dependencies or prerequisites
+   - Plan the implementation approach
+   - Consider project guidelines and standards
+5. **Start Execution via Task**:
+   - Update selected task status to 🔄 (in progress) in TODO.md
+   - **IMMEDIATELY** begin working on the task using the `task:` command workflow
+   - Plan out the implementation steps before proceeding
+   - Prompt the user with the plan if the task is complex (3+ steps)
+   - Wait for user confirmation before executing complex tasks
+   - Execute the task following all quality assurance requirements
+   - Mark the task as ✅ (completed) when finished, after all quality checks pass
+6. **Report Progress**:
+   - Summarize which task was selected and why
+   - Report the execution plan
+   - Update status as work progresses
+
+**Execution Order**:
+1. Read TODO.md and PROJECT.md
+2. Analyze pending tasks and select next task(s)
+3. Plan task execution approach
+4. Update task status to 🔄 (in progress)
+5. Begin execution following `task:` command workflow
+6. Complete task with all quality checks
+7. Mark task as ✅ (completed) when done
+
+**Important Notes**:
+- This command combines planning and execution
+- Follows the same execution workflow as `task:` command
+- Must complete all quality checks before marking task complete
+- Can select multiple related tasks if appropriate
+- Should prioritize tasks logically based on dependencies
+
+**Example**:
+- User types: `next:` OR `:next`
+- Agent reads TODO.md, identifies next pending task, updates status to 🔄, plans implementation, begins execution, completes with quality checks, and marks as ✅ when done
+
+### `work:` or `:work`
+
+**Action**: Start working on unfinished todo items from TODO.md
+
+**Process**:
+1. **MANDATORY**: Read TODO.md to identify unfinished tasks
+2. **MANDATORY**: Read PROJECT.md to understand project guidelines
+3. **Identify Unfinished Tasks**:
+   - Review all tasks with status ⬜ (pending) in TODO.md
+   - Identify the first or most logical unfinished task to work on
+   - Check for dependencies or prerequisites if applicable
+4. **Start Execution**:
+   - Update selected task status to 🔄 (in progress) in TODO.md
+   - **IMMEDIATELY** begin working on the task using the `task:` command workflow
+   - Plan out the implementation steps before proceeding
+   - Prompt the user with the plan if the task is complex (3+ steps)
+   - Wait for user confirmation before executing complex tasks
+   - Execute the task following all quality assurance requirements
+   - Mark the task as ✅ (completed) when finished, after all quality checks pass
+5. **Report Progress**:
+   - Summarize which task was selected
+   - Report the execution plan
+   - Update status as work progresses
+
+**Execution Order**:
+1. Read TODO.md and PROJECT.md
+2. Identify first/most logical unfinished task
+3. Update task status to 🔄 (in progress)
+4. Begin execution following `task:` command workflow
+5. Complete task with all quality checks
+6. Mark task as ✅ (completed) when done
+
+**Important Notes**:
+- This command starts working immediately on unfinished todos
+- Follows the same execution workflow as `task:` command
+- Must complete all quality checks before marking task complete
+- Should prioritize tasks logically, typically starting with the first pending task
+- Similar to `next:` but focuses on immediate execution of unfinished items
+
+**Example**:
+- User types: `work:` OR `:work`
+- Agent reads TODO.md, identifies first unfinished task, updates status to 🔄, plans implementation, begins execution, completes with quality checks, and marks as ✅ when done
+
+### `help:` or `:help` or `help: <command>` or `<command>: help`
+
+**Action**: List all available commands or describe what a specific command does
+
+**Parameters**:
+- **No parameter**: Lists all available commands with brief descriptions
+- **First parameter (`command`)**: The name of a specific command to get detailed information about (e.g., `check`, `update`, `updatecode`)
+
+**Process**:
+1. If no command is specified, list all available commands with brief descriptions
+2. If a specific command is provided (e.g., `help: check`), provide detailed information about that command
+3. Format the output in a clear, readable way
+4. Include usage examples for each command
+5. Show that commands can be used at the beginning or end of a message
+
+**Available Commands**:
+
+- **`agent: <message>`** or **`<message>: agent`**
+  - Add the message as a new instruction to .cursorrules
+  - Example: `agent: Always use functional components`
+
+- **`project: <message>`** or **`<message>: project`**
+  - Add the message as a new guideline to PROJECT.md
+  - Example: `project: All components must support dark mode`
+
+- **`command: <commandname> <commandpurpose>`** or **`<commandname> <commandpurpose>: command`**
+  - Add a new command to COMMANDS.md with the specified name and purpose
+  - Parameters: `commandname` (command name), `commandpurpose` (brief description)
+  - Example: `command: test Run all test suites`
+
+- **`todo: <message>`** or **`<message>: todo`**
+  - Add a new task to TODO.md with status ⬜ (pending)
+  - Example: `todo: Add dark mode toggle`
+
+- **`task: <message>`** or **`<message>: task`**
+  - Add a task to TODO.md with status 🔄 (in progress) and begin executing it immediately
+  - Example: `task: Add dark mode toggle`
+
+- **`now: <message>`** or **`<message>: now`**
+  - Execute the task immediately without adding it to TODO.md
+  - Example: `now: Fix typo in Button component`
+
+- **`qna: <question>`** or **`<question>: qna`**
+  - Answer the user's question directly without making any code changes
+  - Example: `qna: How do I use the Button component?`
+
+- **`then: <command>`** or **`:then <command>`** or **`<command>: then`**
+  - Explicitly chain together agent commands, executing the next command after the previous one completes
+  - Example: `agent: something :then agent: else` (equivalent to `agent: something ; else`)
+
+- **`check:`** or **`:check`**
+  - Run all lints and builds across all packages and fix all issues until there are none
+  - Example: `check:`
+
+- **`update:`** or **`:update`** or **`update: <target>`** or **`:update <target>`**
+  - Update documentation, code, project guidelines, or commands based on target parameter
+  - Parameters: `target` (optional, defaults to `docs`): `docs`, `code`, `project`, or `commands`
+  - Examples:
+    - `update:` or `update: docs` - Update all documentation files
+    - `update: code` - Analyze and improve codebase
+    - `update: project` - Update PROJECT.md guidelines
+    - `update: commands` - Update command documentation in COMMANDS.md
+
+- **`updatecode:`** or **`:updatecode`** or **`update: code`** or **`:update code`**
+  - Analyze the codebase for code quality issues, simplifications, cleanup opportunities, unfinished code, and improvements
+  - Example: `updatecode:` or `update: code`
+
+- **`updateproject:`** or **`:updateproject`** or **`update: project`** or **`:update project`** or **`projectupdate:`** or **`:projectupdate`**
+  - Analyze and update PROJECT.md with current project state, guidelines, and standards
+  - Example: `updateproject:` or `update: project`
+
+- **`updatecommands:`** or **`:updatecommands`** or **`update: commands`** or **`:update commands`**
+  - Update command documentation in COMMANDS.md to ensure all commands are properly documented
+  - Example: `updatecommands:` or `update: commands`
+
+- **`clean:`** or **`:clean`**
+  - Clean up code by removing unused imports, variables, console statements, and other cleanup tasks
+  - Example: `clean:` or `:clean`
+
+- **`agent: update agent`** or **`:agent update agent`** or **`:updateagent`** or **`:agentupdate`** or **`agent update: agent`** or **`agentupdate:`**
+  - Review, validate, and update instruction files to ensure they are comprehensive, non-redundant, logically organized, and accurately describe the codebase
+  - Example: `agent: update agent` or `:updateagent`
+
+- **`organize:`** or **`:organize`**
+  - Organize and restructure code by improving file structure, grouping related code, and ensuring consistent organization patterns
+  - Example: `organize:` or `:organize`
+
+- **`workflow:`** or **`:workflow`**
+  - Run all maintenance commands sequentially in a sensible order (plan → clean → updatecode → organize → check → update project → update docs → update commands)
+  - Example: `workflow:`
+
+- **`streamline:`** or **`:streamline`** or **`streamline: <targets>`** or **`:streamline <targets>`**
+  - Streamline and update specific areas of the codebase based on target parameters
+  - Parameters: `targets` (optional, defaults to `all`): `code`, `docs`, `todo`, `project`, `commands`, or `all`
+  - Examples:
+    - `streamline:` or `streamline: all` - Streamline all targets
+    - `streamline: code` - Streamline only code quality
+    - `streamline: docs, todo` - Streamline documentation and TODO.md
+
+- **`plan:`** or **`:plan`**
+  - Plan out next development steps and document them in TODO.md
+  - Example: `plan:` or `:plan`
+
+- **`next:`** or **`:next`**
+  - Plan out todo items and start executing them via task
+  - Example: `next:` or `:next`
+
+- **`work:`** or **`:work`**
+  - Start working on unfinished todo items from TODO.md
+  - Example: `work:` or `:work`
+
+- **`help:`** or **`:help`** or **`help: <command>`** or **`<command>: help`**
+  - List all available commands or describe what a specific command does
+  - Parameters: `command` (optional): The name of a specific command to get detailed information about
+  - Examples:
+    - `help:` - List all available commands
+    - `help: check` - Get detailed information about the check command
+
+**Note**: All commands support both prefix formats (at the beginning or end of the message).
+
+**Example**:
+- User types: `help:` OR `:help`
+- Agent lists all available commands with descriptions
+
+- User types: `help: check` OR `check: help`
+- Agent provides detailed information about the `check:` command
+
