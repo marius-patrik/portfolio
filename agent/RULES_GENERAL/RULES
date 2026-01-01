@@ -1,0 +1,136 @@
+# General Agent Rules
+
+> **IMPORTANT**: This file contains fundamental rules that govern agent behavior across all projects. For detailed instructions and procedures, see [INSTRUCTIONS](INSTRUCTIONS). For command documentation, see [COMMANDS](COMMANDS).
+
+## Core Principles
+
+### 1. Always Maintain Code Quality
+- **NEVER** skip quality checks (lint, build, tests)
+- **ALWAYS** fix issues before marking tasks complete
+- **ALWAYS** verify functionality works as intended
+- **ALWAYS** follow project coding standards and conventions
+
+### 2. Always Update Documentation
+- **MANDATORY**: Update documentation when code changes
+- Keep README files current and accurate
+- Update code comments when logic changes
+- Ensure documentation matches implementation
+
+### 3. Always Track Work
+- **MANDATORY**: Track all work via TODO.md (except when using `:now` command)
+- **CRITICAL**: The `:now` or `now:` command is the **ONLY** exception to mandatory todo tracking
+- Mark tasks complete **ONLY** after all quality checks pass
+- Update task status as work progresses (⬜ → 🔄 → ✅)
+- Add new todos when discovering issues or requirements
+
+### 4. Always Plan Before Executing
+- **MANDATORY**: Plan complex tasks (3+ steps) before implementation
+- Break down tasks into clear, actionable steps
+- **MANDATORY**: Prompt user with plan before beginning execution
+- Wait for user confirmation before proceeding
+- Consider how changes affect the entire codebase
+
+### 5. Always Maintain Consistency
+- Follow existing code patterns and conventions
+- Maintain consistency across the entire codebase
+- Consider cross-package dependencies and impacts
+- Test changes across all affected packages, not just one
+
+## File Analysis Rules
+
+### 6. Analyze All Files at Session Start
+- **MANDATORY**: Read and analyze all files at the beginning of every conversation
+- **EXCEPTION**: Files in `agent/temp/` directory must be **IGNORED** during initial analysis
+- Temp files are workspace-specific and should not influence general behavior
+- All other files should be analyzed to establish complete context
+
+### 7. Review Project Documentation First
+- **MANDATORY**: Review project documentation (PROJECT.md, README.md, TODO.md) before starting work
+- Read COMMANDS.md for command documentation
+- Review "Active Checks" section in TODO.md during every coding session
+- Review "End of Development" section before marking releases complete
+
+## Code Modification Rules
+
+### 8. Never Break Existing Functionality
+- Test changes to ensure no regressions
+- Verify existing features still work after modifications
+- Consider backward compatibility
+- Update dependent code when making breaking changes
+
+### 9. Keep Code Simple
+- Prefer simple, readable solutions over clever ones
+- Avoid unnecessary complexity
+- Refactor when code becomes overly complicated
+- Make code maintainable and understandable
+
+### 10. Follow Type Safety
+- Use proper TypeScript types (no `any` unless absolutely necessary)
+- Define clear interfaces and types
+- Ensure type safety across the codebase
+- Fix type errors immediately
+
+## Quality Assurance Rules
+
+### 11. Complete Quality Checklist After Every Task
+- Confirm implementation works as intended
+- Run lint and fix ALL issues
+- Run build and fix ALL errors
+- Test functionality and edge cases
+- Update todos and documentation
+- **MANDATORY**: Mark tasks complete (✅) only after ALL checks pass
+
+## Command Handling Rules
+
+### 12. Support All Command Formats
+- Commands work at beginning OR end: `agent: <msg>` OR `<msg>: agent`
+- Support semicolon chaining: `agent: something ; else`
+- Support alternative formats: `update: code` OR `updatecode:`
+- Handle command parameters correctly
+
+## Communication Rules
+
+### 13. Be Clear and Transparent
+- Explain what you're doing and why
+- Report findings and issues clearly
+- Provide context for decisions
+- Ask for clarification when requirements are unclear
+
+### 14. Respect User Intent
+- Follow user instructions precisely
+- Ask for confirmation before major changes
+- Respect user preferences and decisions
+- Don't make assumptions about user intent
+
+## Error Handling Rules
+
+### 15. Fix Issues Immediately
+- Don't leave broken code or failing builds
+- Fix linting errors before proceeding
+- Resolve build errors immediately
+- Address test failures promptly
+
+### 16. Report Problems Clearly
+- Clearly communicate any issues encountered
+- Explain what went wrong and why
+- Suggest solutions when possible
+- Don't proceed with broken code
+
+## Security Rules
+
+### 17. Never Commit Sensitive Information
+- Don't hardcode API keys or secrets
+- Use environment variables for sensitive data
+- Follow security best practices
+- Respect privacy and data protection
+
+## Summary
+
+These rules ensure:
+- ✅ Code quality and maintainability
+- ✅ Proper documentation and tracking
+- ✅ Consistent and predictable behavior
+- ✅ Respect for project structure and user intent
+- ✅ Complete and thorough work
+
+**Remember**: These rules apply to ALL projects. Project-specific guidelines supplement but do not override these rules.

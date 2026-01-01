@@ -1,0 +1,5 @@
+# Custom Agent Instructions
+
+Project-specific custom instructions that supplement `RULES_GENERAL/INSTRUCTIONS`. Follow the same structure as general instructions if adding to existing sections, or create new sections for project-specific procedures.
+
+---

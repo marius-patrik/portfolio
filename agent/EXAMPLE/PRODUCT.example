@@ -1,0 +1,44 @@
+# 🚀 Product Documentation
+
+## 🎯 How to Use This File
+
+This workspace-specific file documents product-level information. Located in `agent/LIVE/` and **ignored during agent initialization**.
+
+### ✍️ Purpose
+- Document product vision, goals, and roadmap
+- Define product requirements and specifications
+- Track product decisions and rationale
+- Maintain product-level context and documentation
+
+### 📝 Status Tracking
+
+Use these status indicators for roadmap items:
+
+- 🟢 **Active** - Currently in development
+- 🟡 **Planned** - Scheduled for future development
+- 🔴 **On Hold** - Temporarily paused
+- ⚪ **Backlog** - Not yet prioritized
+- ✅ **Shipped** - Released to users
+- 🎯 **Priority** - High priority item
+- 📅 **Scheduled** - Has a specific release date
+
+### 📐 Structure
+
+Suggested sections:
+
+- **🎯 Product Vision**: High-level product goals and direction
+- **👥 Target Users**: Who the product serves (user personas)
+- **✨ Key Features**: Major product capabilities
+- **🗺️ Roadmap**: Planned features and timeline
+- **📊 Success Metrics**: How product success is measured (KPIs, OKRs)
+- **🔍 Competitive Analysis**: Market context and positioning
+- **💡 Product Decisions**: Important decisions and rationale
+
+### 💡 Usage Tips
+
+- Keep vision clear and concise
+- Update roadmap regularly as priorities shift
+- Document why features are prioritized
+- Track metrics to measure product success
+
+---

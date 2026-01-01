@@ -1,0 +1,5 @@
+# Custom Agent Rules
+
+Project-specific custom rules that supplement `RULES_GENERAL/RULES`. Follow the same structure as general rules if adding to existing categories, or create new sections for project-specific rule categories.
+
+---

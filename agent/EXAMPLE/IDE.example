@@ -1,0 +1,72 @@
+# IDE Agent Configuration
+
+This project uses a structured agent rules system located in the `agent/` folder. The IDE agent MUST follow these rules:
+
+## Required Reading
+
+**MANDATORY**: At the beginning of every coding session, the agent MUST read and understand:
+
+1. **General Rules** (always apply):
+   - `agent/RULES_GENERAL/RULES` - Fundamental rules for all projects
+   - `agent/RULES_GENERAL/INSTRUCTIONS` - Detailed procedures and workflows
+   - `agent/RULES_GENERAL/COMMANDS` - Command documentation
+
+2. **Project-Specific Rules** (if they exist):
+   - `agent/RULES_PROJECT/RULES` - Custom rules specific to this project
+   - `agent/RULES_PROJECT/INSTRUCTIONS` - Custom instructions for this project
+   - `agent/RULES_PROJECT/COMMANDS` - Custom commands for this project
+
+3. **Project Documentation**:
+   - `PROJECT.md` (or equivalent) - Project guidelines and standards
+   - `README.md` - Project overview and structure
+   - `TODO.md` - Current tasks and status
+
+## File Analysis Rules
+
+- **MANDATORY**: Read and analyze all files in the codebase at the start of every conversation
+- **EXCEPTION**: Files in `agent/LIVE/` directory should be **IGNORED** during initial analysis (they are workspace-specific)
+- All other files should be analyzed to understand the current state of the project
+
+## Rule Application
+
+- General rules from `agent/RULES_GENERAL/` are always applied
+- Project-specific rules from `agent/RULES_PROJECT/` supplement general rules
+- Project rules extend but do not replace general rules
+- If project rules conflict with general rules, project rules take precedence for project-specific cases
+
+## Session Initialization
+
+Before starting any work, the agent MUST:
+
+1. Read all general rules files
+2. Read all project-specific rules files (if they exist)
+3. Read project documentation (PROJECT.md, README.md, TODO.md)
+4. Analyze the codebase structure
+5. Establish context and understand current project state
+
+## Command Handling
+
+All commands are documented in `agent/RULES_GENERAL/COMMANDS` (and `agent/RULES_PROJECT/COMMANDS` if custom commands exist). The agent must:
+
+- Support all documented commands
+- Follow command specifications precisely
+- Support alternative command formats (beginning or end of message)
+- Handle command chaining appropriately
+
+## Quality Assurance
+
+After completing ANY task, the agent MUST:
+
+1. Confirm implementation works as intended
+2. Run lint and fix ALL issues
+3. Run build and fix ALL errors
+4. Test functionality and edge cases
+5. Update todos and documentation
+6. Mark tasks complete (✅) only after ALL checks pass
+
+## Documentation
+
+- Always update documentation when code changes
+- Keep README files current and accurate
+- Ensure documentation matches implementation
+- Update todos as work progresses

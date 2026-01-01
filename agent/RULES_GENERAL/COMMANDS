@@ -1,6 +1,6 @@
 # Agent Commands Reference
 
-> **IMPORTANT**: This file contains all agent command documentation. For agent behavior and task management instructions, see [.cursorrules](.cursorrules).
+> **IMPORTANT**: This file contains all agent command documentation. For agent behavior and task management instructions, see [INSTRUCTIONS](INSTRUCTIONS).
 
 ## User Command Handling
 
@@ -55,15 +55,15 @@ When the user types specific commands, the agent MUST handle them as follows:
 
 ### `command: <commandname> <commandpurpose>` or `<commandname> <commandpurpose>: command`
 
-**Action**: Add a new command to COMMANDS.md with the specified name and purpose
+**Action**: Add a new command to COMMANDS with the specified name and purpose
 
 **Parameters**:
 - **First parameter (`commandname`)**: The name of the command (e.g., `test`, `build`, `deploy`)
 - **Second parameter (`commandpurpose`)**: A brief description of what the command does
 
 **Process**:
-1. Read the current COMMANDS.md file
-2. Find the appropriate section in COMMANDS.md
+1. Read the current COMMANDS file
+2. Find the appropriate section in COMMANDS
 3. Add a new command entry following the existing format
 4. Include:
    - Command name with format variations (with/without colons, prefix/suffix)
@@ -186,10 +186,10 @@ When the user types specific commands, the agent MUST handle them as follows:
 **Action**: Run all lints and builds across all packages and fix all issues until there are none
 
 **Process**:
-1. **MANDATORY**: Run lint for all packages (liqid, desktop, docs, app, page)
+1. **MANDATORY**: Run lint for all packages in the project
 2. Fix ALL linting issues found in any package
 3. Re-run lint after fixes to verify all issues are resolved
-4. **MANDATORY**: Run build for all packages (liqid, desktop, docs, app, page)
+4. **MANDATORY**: Run build for all packages in the project
 5. Fix ALL build errors found in any package
 6. Re-run build after fixes to verify all builds succeed
 7. Repeat steps 1-6 until:
@@ -199,12 +199,12 @@ When the user types specific commands, the agent MUST handle them as follows:
 9. Report the final status: all packages passing or list any remaining issues
 
 **Execution Order**:
-1. Run `npm run lint` in root (runs lint for all packages)
+1. Run lint commands for all packages (check project structure for available commands)
 2. Fix any linting issues found
-3. Run `npm run build:lib` (build liqid first as other packages depend on it)
-4. Fix any build errors in liqid
-5. Run `npm run build` in root (builds all packages)
-6. Fix any build errors in other packages
+3. Run build commands in dependency order (build dependencies first)
+4. Fix any build errors
+5. Run build commands for all packages
+6. Fix any build errors in remaining packages
 7. Repeat until all pass
 
 **Example**:
@@ -233,14 +233,14 @@ When the user types specific commands, the agent MUST handle them as follows:
 
 **Process**:
 1. **MANDATORY**: Read all documentation files:
-   - PROJECT.md (project guidelines and standards)
+   - PROJECT.md (project guidelines and standards) or equivalent project documentation
    - README.md (root readme)
    - TODO.md (task tracking and progress)
-   - All package README files (liqid/README.md, docs/README.md, desktop/README.md, etc.)
-   - Component documentation in docs package (docs/src/data/*.ts files)
-   - liqid/CONFIG.md (if exists)
-   - .cursorrules (agent instructions)
-   - COMMANDS.md (command documentation)
+   - All package README files (if applicable)
+   - Component documentation (if applicable)
+   - Configuration documentation files (if exists)
+   - Agent instructions (INSTRUCTIONS or .cursorrules)
+   - COMMANDS (command documentation)
 
 2. **Analyze Project Progress**:
    - Review TODO.md to identify completed tasks and current status
@@ -252,17 +252,17 @@ When the user types specific commands, the agent MUST handle them as follows:
    - Verify package structure matches documented architecture
 
 3. **Analyze Codebase**:
-   - Review component implementations in liqid/src/components/
-   - Compare with component documentation in docs/src/data/
-   - Check for new components that aren't documented
-   - Verify prop interfaces match documentation
+   - Review component implementations (if applicable)
+   - Compare with component documentation (if applicable)
+   - Check for new components/features that aren't documented
+   - Verify interfaces match documentation
    - Check for deprecated features that should be removed from docs
-   - Verify exported components match index.ts exports
+   - Verify exports match documentation
 
 4. **Update Documentation**:
    - Update README.md if project structure, dependencies, or usage has changed
    - Update PROJECT.md if guidelines, standards, or architecture have changed
-   - Update component documentation in docs/src/data/ if component APIs have changed
+   - Update component documentation if component APIs have changed (if applicable)
    - Update package READMEs if package-specific information has changed
    - Add documentation for new components or features
    - Remove documentation for deprecated features
@@ -276,9 +276,9 @@ When the user types specific commands, the agent MUST handle them as follows:
    - Provide recommendations for further documentation improvements
 
 **Execution Order**:
-1. Read all documentation files (PROJECT.md, README.md, TODO.md, package READMEs, etc.)
-2. Read component documentation (docs/src/data/*.ts)
-3. Review component implementations (liqid/src/components/*.tsx)
+1. Read all documentation files (PROJECT.md or equivalent, README.md, TODO.md, package READMEs, etc.)
+2. Read component documentation (if applicable)
+3. Review component implementations (if applicable)
 4. Compare documentation with actual code
 5. Identify discrepancies and missing documentation
 6. Update documentation files as needed
@@ -317,7 +317,7 @@ When the user types specific commands, the agent MUST handle them as follows:
 3. **Find Simplification Opportunities**:
    - Review complex logic that could be simplified
    - Look for unnecessary abstractions or over-engineering
-   - Identify code that violates project guidelines (e.g., using vanilla HTML/React components when liqid alternatives exist)
+   - Identify code that violates project guidelines
 
 4. **Check Code Consistency**:
    - Verify all components follow the same patterns
@@ -331,10 +331,10 @@ When the user types specific commands, the agent MUST handle them as follows:
    - Look for missing type definitions
 
 6. **Project Guideline Violations**:
-   - Check for vanilla HTML/React components when liqid alternatives exist
-   - Verify Tailwind is only used in liqid package
-   - Ensure components use `themeStyle` prop correctly
-   - Check that all apps use only liqid components
+   - Check for violations of project-specific guidelines
+   - Verify code follows project standards and conventions
+   - Ensure components follow project patterns (if applicable)
+   - Check that code adheres to project architecture
 
 7. **Report Findings**:
    - List all identified issues with file paths and line numbers
@@ -343,7 +343,7 @@ When the user types specific commands, the agent MUST handle them as follows:
    - Optionally fix minor issues automatically (like replacing vanilla buttons with liqid Button)
 
 8. **Optional Auto-fix**:
-   - For simple fixes (e.g., replacing vanilla buttons with liqid Button), fix automatically
+   - For simple fixes that align with project guidelines, fix automatically
    - For complex refactoring, report and wait for approval
    - Always run lint and build after auto-fixes
 
@@ -366,7 +366,7 @@ When the user types specific commands, the agent MUST handle them as follows:
 
 **Example**:
 - User types: `updatecode:` OR `:updatecode` OR `update: code` OR `:update code`
-- Agent scans codebase, identifies Modal using vanilla buttons, WindowManager having duplicate code, finds TODOs, reports findings, and fixes issues automatically where appropriate
+- Agent scans codebase, identifies code quality issues, duplicate code, finds TODOs, reports findings, and fixes issues automatically where appropriate
 
 **Note**: All of these formats are equivalent:
 - `updatecode:` or `:updatecode` (original format)
@@ -379,7 +379,7 @@ When the user types specific commands, the agent MUST handle them as follows:
 **Process**:
 1. **MANDATORY**: Read PROJECT.md file completely
 2. **MANDATORY**: Read current codebase to understand actual implementation:
-   - Review component implementations in liqid/src/components/
+   - Review component implementations (if applicable)
    - Review package structure and organization
    - Check build configurations
    - Review code standards and patterns actually in use
@@ -432,11 +432,11 @@ When the user types specific commands, the agent MUST handle them as follows:
 
 ### `update: commands` or `:update commands` or `updatecommands:` or `:updatecommands`
 
-**Action**: Update command documentation in COMMANDS.md to ensure all commands are properly documented
+**Action**: Update command documentation in COMMANDS to ensure all commands are properly documented
 
 **Process**:
-1. **MANDATORY**: Read the entire COMMANDS.md file
-2. **MANDATORY**: Read COMMANDS.md to identify all documented commands
+1. **MANDATORY**: Read the entire COMMANDS file
+2. **MANDATORY**: Read COMMANDS to identify all documented commands
 3. **MANDATORY**: Identify any commands that are mentioned but not fully documented
 4. **Analyze Command Documentation**:
    - Check if all commands have complete documentation
@@ -459,7 +459,7 @@ When the user types specific commands, the agent MUST handle them as follows:
    - Note any inconsistencies that were fixed
 
 **Execution Order**:
-1. Read COMMANDS.md file
+1. Read COMMANDS file
 2. Identify all commands (documented and undocumented)
 3. Analyze documentation completeness
 4. Update documentation as needed
@@ -475,7 +475,7 @@ When the user types specific commands, the agent MUST handle them as follows:
 
 **Example**:
 - User types: `update: commands` OR `:update commands` OR `updatecommands:` OR `:updatecommands`
-- Agent reads COMMANDS.md, analyzes command documentation, ensures all commands and parameters are documented, updates documentation if needed, and reports findings
+- Agent reads COMMANDS, analyzes command documentation, ensures all commands and parameters are documented, updates documentation if needed, and reports findings
 
 **Note**: All of these formats are equivalent:
 - `updatecommands:` or `:updatecommands` (original format)
@@ -560,24 +560,24 @@ When the user types specific commands, the agent MUST handle them as follows:
 
 **Process**:
 1. **Read All Instruction Files**:
-   - .cursorrules (agent instructions)
-   - PROJECT.md (project guidelines and standards)
+   - INSTRUCTIONS or .cursorrules (agent instructions)
+   - PROJECT.md (project guidelines and standards) or equivalent
    - README.md (root readme)
    - TODO.md (task tracking)
-   - All package README files (liqid/README.md, docs/README.md, liqid-types/README.md, etc.)
-   - liqid/CONFIG.md (if exists)
-   - COMMANDS.md (command documentation)
+   - All package README files (if applicable)
+   - Configuration documentation files (if exists)
+   - COMMANDS (command documentation)
    - Any other documentation files
 
 2. **Analyze Codebase Structure**:
-   - Review all components in liqid/src/components/
-   - Review all hooks in liqid/src/hooks/
-   - Review all types in liqid/src/types/ and liqid-types/src/
-   - Review exports in liqid/src/index.ts
+   - Review all components (if applicable)
+   - Review all hooks (if applicable)
+   - Review all types (if applicable)
+   - Review exports and entry points
    - Review package.json files for dependencies and scripts
-   - Review build configurations (rslib.config.ts, rsbuild.config.ts, etc.)
-   - Review component documentation in docs/src/data/
-   - Understand the monorepo structure and package relationships
+   - Review build configurations
+   - Review component documentation (if applicable)
+   - Understand the project structure and package relationships
 
 3. **Check for Redundancy**:
    - Identify duplicate information across files
@@ -602,10 +602,10 @@ When the user types specific commands, the agent MUST handle them as follows:
    - Ensure all key features are documented
 
 6. **Update Documentation**:
-   - Update .cursorrules to reflect current codebase structure
-   - Update PROJECT.md with accurate component lists, hooks, types, and architecture
+   - Update agent instructions to reflect current codebase structure
+   - Update PROJECT.md with accurate component lists, hooks, types, and architecture (if applicable)
    - Update README.md with current installation, usage, and project structure
-   - Update package READMEs with accurate information
+   - Update package READMEs with accurate information (if applicable)
    - Add missing documentation for new components, hooks, or features
    - Remove outdated information
    - Fix inconsistencies between files
@@ -765,7 +765,7 @@ When the user types specific commands, the agent MUST handle them as follows:
 5. `check:` - Final comprehensive lint and build check across all packages
 6. `update: project` - Update PROJECT.md guidelines
 7. `update: docs` - Update all documentation files
-8. `update: commands` - Update command documentation in COMMANDS.md
+8. `update: commands` - Update command documentation in COMMANDS
 
 **Important Notes**:
 - This workflow is comprehensive and may take significant time
@@ -792,7 +792,7 @@ When the user types specific commands, the agent MUST handle them as follows:
   - `docs` - Streamline documentation, ensure consistency and completeness
   - `todo` - Streamline TODO.md, organize tasks, remove completed items, prioritize
   - `project` - Streamline PROJECT.md, update guidelines, ensure accuracy
-  - `commands` - Streamline COMMANDS.md, ensure all commands are documented
+  - `commands` - Streamline COMMANDS, ensure all commands are documented
   - `all` (or omitted) - Streamline all targets in sequence
 
 **Process**:
@@ -829,7 +829,7 @@ When the user types specific commands, the agent MUST handle them as follows:
      - Remove outdated information
    
    - **For `commands` target**:
-     - Run `update: commands` to update COMMANDS.md
+     - Run `update: commands` to update COMMANDS
      - Ensure all commands are properly documented
      - Verify command examples are accurate
 
@@ -849,7 +849,7 @@ When the user types specific commands, the agent MUST handle them as follows:
 2. `todo` - Streamline TODO.md
 3. `project` - Streamline PROJECT.md
 4. `docs` - Streamline documentation
-5. `commands` - Streamline COMMANDS.md
+5. `commands` - Streamline COMMANDS
 
 **Important Notes**:
 - Targets can be specified individually or in combination
@@ -874,7 +874,7 @@ When the user types specific commands, the agent MUST handle them as follows:
 
 **Process**:
 1. **MANDATORY**: Read TODO.md to understand current tasks and status
-2. **MANDATORY**: Read PROJECT.md to understand project guidelines and standards
+2. **MANDATORY**: Read PROJECT.md (or equivalent) to understand project guidelines and standards
 3. **MANDATORY**: Read README.md to understand project overview and structure
 4. **Analyze Current State**:
    - Review pending tasks in TODO.md
@@ -902,7 +902,7 @@ When the user types specific commands, the agent MUST handle them as follows:
    - Note any considerations or constraints
 
 **Execution Order**:
-1. Read TODO.md, PROJECT.md, and README.md
+1. Read TODO.md, PROJECT.md (or equivalent), and README.md
 2. Analyze current project state and pending tasks
 3. Plan logical next development steps
 4. Document plan in TODO.md
@@ -917,7 +917,7 @@ When the user types specific commands, the agent MUST handle them as follows:
 
 **Example**:
 - User types: `plan:` OR `:plan`
-- Agent reads TODO.md, PROJECT.md, and README.md, analyzes current state, plans next development steps, documents them in TODO.md, and reports the plan
+- Agent reads TODO.md, PROJECT.md (or equivalent), and README.md, analyzes current state, plans next development steps, documents them in TODO.md, and reports the plan
 
 ### `next:` or `:next`
 
@@ -925,7 +925,7 @@ When the user types specific commands, the agent MUST handle them as follows:
 
 **Process**:
 1. **MANDATORY**: Read TODO.md to identify pending tasks
-2. **MANDATORY**: Read PROJECT.md to understand project guidelines
+2. **MANDATORY**: Read PROJECT.md (or equivalent) to understand project guidelines
 3. **Analyze Pending Tasks**:
    - Review all tasks with status ⬜ (pending) in TODO.md
    - Identify the most logical next task(s) to work on
@@ -1040,7 +1040,7 @@ When the user types specific commands, the agent MUST handle them as follows:
   - Example: `project: All components must support dark mode`
 
 - **`command: <commandname> <commandpurpose>`** or **`<commandname> <commandpurpose>: command`**
-  - Add a new command to COMMANDS.md with the specified name and purpose
+  - Add a new command to COMMANDS with the specified name and purpose
   - Parameters: `commandname` (command name), `commandpurpose` (brief description)
   - Example: `command: test Run all test suites`
 

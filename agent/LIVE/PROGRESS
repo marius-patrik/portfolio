@@ -1,0 +1,45 @@
+# 📈 Progress Tracking
+
+## 🎯 How to Use This File
+
+This workspace-specific file tracks project progress and milestones. Located in `agent/LIVE/` and **ignored during agent initialization**.
+
+### ✍️ Purpose
+- Track development progress and milestones
+- Document completed work and achievements
+- Maintain a log of project evolution
+- Track progress toward goals and deadlines
+
+### 📝 Status Tracking
+
+Use these status indicators to track progress:
+
+- ✅ **Completed** - Task/work item is finished
+- 🔄 **In Progress** - Currently being worked on
+- ⏸️ **Paused** - Temporarily stopped
+- 🔴 **Blocked** - Cannot proceed due to blocker
+- ⚪ **Not Started** - Planned but not yet begun
+- 🎯 **Priority** - High priority item
+- 📅 **Due Soon** - Approaching deadline
+- ⚠️ **At Risk** - May not meet deadline
+
+### 📐 Structure
+
+Suggested sections:
+
+- **📍 Current Status**: Overview of where the project stands
+- **🎉 Recent Achievements**: Recently completed work (with dates)
+- **🏆 Milestones**: Major project milestones and dates
+- **📜 Progress Log**: Chronological log of progress (newest first)
+- **🎯 Next Steps**: Upcoming work and priorities
+- **🚧 Blockers**: Current impediments or challenges
+- **📊 Metrics**: Key metrics tracking progress (velocity, completion rate, etc.)
+
+### 💡 Usage Tips
+
+- Update this file regularly (weekly or after major milestones)
+- Use dates to track when items were completed
+- Be specific about blockers and how to resolve them
+- Celebrate achievements to maintain momentum
+
+---

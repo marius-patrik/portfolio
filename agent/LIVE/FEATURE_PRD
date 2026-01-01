@@ -1,0 +1,44 @@
+# 📋 Feature PRD (Product Requirements Document)
+
+## 🎯 How to Use This File
+
+This workspace-specific file documents feature requirements and specifications. Located in `agent/LIVE/` and **ignored during agent initialization**.
+
+### ✍️ Purpose
+- Document feature requirements, user stories, and acceptance criteria
+- Define feature scope, goals, and success metrics
+- Outline technical requirements and constraints
+- Track feature-related decisions and discussions
+
+### 📝 Status Tracking
+
+Use these status indicators to track feature progress:
+
+- 🟢 **Green** - Feature is complete and ready
+- 🟡 **Yellow** - Feature is in progress
+- 🔴 **Red** - Feature is blocked or on hold
+- ⚪ **White** - Feature is planned but not started
+- ✅ **Done** - Feature is fully implemented and tested
+- ⏸️ **Paused** - Feature work is temporarily stopped
+- 🔄 **In Review** - Feature is being reviewed or tested
+
+### 📐 Structure
+
+Suggested sections:
+
+- **🎯 Feature Overview**: Brief description of the feature
+- **🎨 Goals**: What this feature aims to achieve
+- **👤 User Stories**: User-facing requirements (format: "As a [user], I want [goal] so that [benefit]")
+- **⚙️ Technical Requirements**: Implementation details and constraints
+- **✅ Acceptance Criteria**: Definition of done (specific, testable conditions)
+- **❓ Open Questions**: Items that need clarification
+- **📊 Success Metrics**: How feature success will be measured
+
+### 💡 Usage Tips
+
+- Update this file as requirements evolve
+- Link to related issues, PRs, or documentation
+- Include mockups, diagrams, or examples when helpful
+- Mark status clearly at the top of the document
+
+---

@@ -1,0 +1,25 @@
+# Custom Agent Commands
+
+Project-specific custom commands that supplement `RULES_GENERAL/COMMANDS`. Follow the same documentation format as general commands.
+
+### Command Documentation Format
+
+```markdown
+### `commandname:` or `:commandname` or `commandname: <args>` or `<args>: commandname`
+
+**Action**: Brief description of what the command does
+
+**Parameters** (if applicable):
+- **Parameter name**: Description
+
+**Process**:
+1. Step 1
+2. Step 2
+3. Step 3
+
+**Example**:
+- User types: `commandname: example`
+- Agent performs the action
+```
+
+---

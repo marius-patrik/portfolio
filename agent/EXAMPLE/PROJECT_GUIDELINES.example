@@ -1,0 +1,42 @@
+# 📚 Project Guidelines
+
+## 🎯 How to Use This File
+
+This workspace-specific file documents project-specific guidelines and standards. Located in `agent/LIVE/` and **ignored during agent initialization**.
+
+### ✍️ Purpose
+- Document project-specific coding standards and conventions
+- Define project architecture and design patterns
+- Establish development workflow and best practices
+- Maintain project-specific rules and guidelines
+
+### 📝 Status Tracking
+
+Use these indicators for guideline compliance:
+
+- ✅ **Required** - Must follow this guideline
+- ⚠️ **Recommended** - Should follow when possible
+- 💡 **Best Practice** - Suggested approach
+- 🔄 **Evolving** - Guideline is being refined
+- 📋 **Reference** - Informational guideline
+
+### 📐 Structure
+
+Suggested sections:
+
+- **💻 Code Standards**: Coding conventions and style guidelines
+- **🏗️ Architecture**: System design and structure
+- **🔄 Development Workflow**: How work is organized and executed
+- **✨ Best Practices**: Recommended approaches and patterns
+- **❌ Common Pitfalls**: Things to avoid
+- **🛠️ Tooling**: Development tools and configurations
+- **📦 Dependencies**: Key dependencies and their purposes
+
+### 💡 Usage Tips
+
+- Keep guidelines actionable and specific
+- Include code examples when helpful
+- Update as project evolves
+- Link to external documentation when relevant
+
+---
